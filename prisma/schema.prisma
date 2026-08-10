@@ -1,0 +1,511 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+}
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+  MODEL_3D
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  QUOTED
+  WON
+  LOST
+  SPAM
+}
+
+enum EnquirySource {
+  WEBSITE_FORM
+  WHATSAPP
+  BROCHURE
+  PHONE
+  DEALER
+  OTHER
+}
+
+enum ServiceCentreType {
+  HEAD_OFFICE
+  SALES_SERVICE_OFFICE
+  PRESENCE
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(EDITOR)
+  active       Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+model MachineCategory {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  shortName   String?
+  description String? @db.Text
+
+  sortOrder Int     @default(0)
+  active    Boolean @default(true)
+
+  machines Machine[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([sortOrder])
+}
+
+model Machine {
+  id String @id @default(cuid())
+
+  categoryId String
+  category   MachineCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+
+  name     String
+  slug     String  @unique
+  eyebrow  String?
+  headline String?
+  summary  String? @db.Text
+  body     String? @db.LongText
+
+  status    PublishStatus @default(DRAFT)
+  featured  Boolean       @default(false)
+  sortOrder Int           @default(0)
+
+  heroMediaId String?
+  heroMedia   Media?  @relation("MachineHeroMedia", fields: [heroMediaId], references: [id], onDelete: SetNull)
+
+  models        MachineModel[]
+  features      MachineFeature[]
+  media         MachineMedia[]
+  installations InstallationMachine[]
+  enquiries     Enquiry[]
+
+  crossSellsFrom MachineCrossSell[] @relation("CrossSellSource")
+  crossSellsTo   MachineCrossSell[] @relation("CrossSellTarget")
+
+  seo SeoMetadata?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([slug])
+  @@index([status])
+  @@index([featured])
+}
+
+model MachineModel {
+  id String @id @default(cuid())
+
+  machineId String
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+
+  name        String
+  slug        String
+  modelNumber String
+
+  shortDescription String? @db.Text
+
+  active    Boolean @default(true)
+  sortOrder Int     @default(0)
+
+  specifications MachineSpecification[]
+  enquiries      Enquiry[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([machineId, slug])
+  @@unique([machineId, modelNumber])
+  @@index([machineId])
+  @@index([modelNumber])
+  @@index([sortOrder])
+}
+
+model MachineSpecification {
+  id String @id @default(cuid())
+
+  machineModelId String
+  machineModel   MachineModel @relation(fields: [machineModelId], references: [id], onDelete: Cascade)
+
+  groupName String?
+  label     String
+  value     String
+  unit      String?
+
+  sortOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([machineModelId])
+  @@index([groupName])
+  @@index([sortOrder])
+}
+
+model MachineFeature {
+  id String @id @default(cuid())
+
+  machineId String
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+
+  title       String
+  description String? @db.Text
+
+  statValue String?
+  statLabel String?
+
+  threeObjectKey String?
+  scrollChapter  Int?
+
+  sortOrder Int     @default(0)
+  active    Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([machineId])
+  @@index([sortOrder])
+}
+
+model Media {
+  id String @id @default(cuid())
+
+  type MediaType
+
+  title       String?
+  altText     String?
+  caption     String? @db.Text
+  description String? @db.Text
+
+  url      String
+  publicId String?
+
+  mimeType String?
+  width    Int?
+  height   Int?
+  fileSize Int?
+
+  duration Int?
+
+  machineHeroFor    Machine[]           @relation("MachineHeroMedia")
+  machineMedia      MachineMedia[]
+  installationMedia InstallationMedia[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([createdAt])
+}
+
+model MachineMedia {
+  id String @id @default(cuid())
+
+  machineId String
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+
+  mediaId String
+  media   Media  @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  label String?
+
+  isGallery Boolean @default(true)
+  isHero    Boolean @default(false)
+
+  sortOrder Int @default(0)
+
+  createdAt DateTime @default(now())
+
+  @@unique([machineId, mediaId])
+  @@index([machineId])
+  @@index([mediaId])
+  @@index([sortOrder])
+}
+
+model Installation {
+  id String @id @default(cuid())
+
+  title String?
+
+  clientName     String?
+  anonymousLabel String?
+
+  city    String
+  state   String
+  country String @default("India")
+
+  installationYear Int?
+
+  description String? @db.Text
+
+  challenge String? @db.Text
+  solution  String? @db.Text
+  outcome   String? @db.Text
+
+  clientPermission Boolean @default(false)
+  featured         Boolean @default(false)
+
+  status PublishStatus @default(DRAFT)
+
+  machines InstallationMachine[]
+  media    InstallationMedia[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([state])
+  @@index([country])
+  @@index([installationYear])
+  @@index([featured])
+  @@index([status])
+}
+
+model InstallationMachine {
+  id String @id @default(cuid())
+
+  installationId String
+  installation   Installation @relation(fields: [installationId], references: [id], onDelete: Cascade)
+
+  machineId String
+  machine   Machine @relation(fields: [machineId], references: [id], onDelete: Cascade)
+
+  modelName String?
+
+  @@unique([installationId, machineId])
+  @@index([installationId])
+  @@index([machineId])
+}
+
+model InstallationMedia {
+  id String @id @default(cuid())
+
+  installationId String
+  installation   Installation @relation(fields: [installationId], references: [id], onDelete: Cascade)
+
+  mediaId String
+  media   Media  @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  sortOrder Int @default(0)
+
+  @@unique([installationId, mediaId])
+  @@index([installationId])
+  @@index([mediaId])
+}
+
+model ServiceCentre {
+  id String @id @default(cuid())
+
+  name String
+  slug String @unique
+
+  type ServiceCentreType
+
+  address String? @db.Text
+
+  city    String
+  state   String
+  country String @default("India")
+
+  latitude  Decimal? @db.Decimal(10, 7)
+  longitude Decimal? @db.Decimal(10, 7)
+
+  coverageRadiusKm Int?
+
+  phone    String?
+  whatsapp String?
+  email    String?
+
+  active    Boolean @default(true)
+  sortOrder Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([state])
+  @@index([sortOrder])
+}
+
+model Testimonial {
+  id String @id @default(cuid())
+
+  clientName String?
+  company    String?
+  location   String?
+
+  quote String @db.Text
+
+  outcomeValue String?
+  outcomeLabel String?
+
+  permissionGranted Boolean @default(false)
+
+  featured  Boolean @default(false)
+  active    Boolean @default(true)
+  sortOrder Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([featured])
+  @@index([sortOrder])
+}
+
+model Enquiry {
+  id String @id @default(cuid())
+
+  name  String
+  phone String
+  email String?
+
+  city    String?
+  state   String?
+  country String? @default("India")
+
+  company String?
+
+  message String? @db.Text
+
+  machineId String?
+  machine   Machine? @relation(fields: [machineId], references: [id], onDelete: SetNull)
+
+  machineModelId String?
+  machineModel   MachineModel? @relation(fields: [machineModelId], references: [id], onDelete: SetNull)
+
+  source EnquirySource @default(WEBSITE_FORM)
+  status EnquiryStatus @default(NEW)
+
+  pageUrl  String?
+  referrer String?
+
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmContent  String?
+  utmTerm     String?
+
+  internalNotes String? @db.Text
+
+  contactedAt DateTime?
+  qualifiedAt DateTime?
+  quotedAt    DateTime?
+  closedAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([phone])
+  @@index([email])
+  @@index([machineId])
+  @@index([machineModelId])
+  @@index([status])
+  @@index([source])
+  @@index([createdAt])
+}
+
+model BrochureLead {
+  id String @id @default(cuid())
+
+  name  String
+  phone String
+  city  String
+
+  email String?
+
+  brochureKey String
+
+  pageUrl String?
+
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+
+  createdAt DateTime @default(now())
+
+  @@index([phone])
+  @@index([brochureKey])
+  @@index([createdAt])
+}
+
+model MachineCrossSell {
+  id String @id @default(cuid())
+
+  sourceMachineId String
+  sourceMachine   Machine @relation("CrossSellSource", fields: [sourceMachineId], references: [id], onDelete: Cascade)
+
+  targetMachineId String
+  targetMachine   Machine @relation("CrossSellTarget", fields: [targetMachineId], references: [id], onDelete: Cascade)
+
+  label String?
+
+  sortOrder Int @default(0)
+
+  @@unique([sourceMachineId, targetMachineId])
+  @@index([sourceMachineId])
+  @@index([targetMachineId])
+}
+
+model SeoMetadata {
+  id String @id @default(cuid())
+
+  machineId String?  @unique
+  machine   Machine? @relation(fields: [machineId], references: [id], onDelete: Cascade)
+
+  title       String?
+  description String? @db.Text
+
+  canonicalUrl String?
+
+  ogTitle       String?
+  ogDescription String? @db.Text
+  ogImageUrl    String?
+
+  noIndex  Boolean @default(false)
+  noFollow Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteSetting {
+  id String @id @default(cuid())
+
+  key   String  @unique
+  value String? @db.LongText
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([key])
+}
