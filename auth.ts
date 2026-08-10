@@ -74,7 +74,7 @@ export const {
   ],
 
   callbacks: {
-    ...authConfig.callbacks,
+    ...((authConfig as { callbacks?: Record<string, unknown> }).callbacks ?? {}),
 
     async jwt({ token, user }) {
       if (user) {
