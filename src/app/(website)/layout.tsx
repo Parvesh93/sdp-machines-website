@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
 
-import { SiteHeader } from "@/components/website/site-header";
-import { SiteFooter } from "@/components/website/site-footer";
-import { WhatsAppButton } from "@/components/website/whatsapp-button";
+import { Header } from "@/components/website/header";
 
 type WebsiteLayoutProps = {
   children: ReactNode;
@@ -12,14 +10,12 @@ export default function WebsiteLayout({
   children,
 }: WebsiteLayoutProps) {
   return (
-    <>
-      <SiteHeader />
+    <div className="website">
+      <Header />
 
-      <main>{children}</main>
-
-      <SiteFooter />
-
-      <WhatsAppButton />
-    </>
+      <main>
+        {children}
+      </main>
+    </div>
   );
 }

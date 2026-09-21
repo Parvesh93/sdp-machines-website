@@ -3,6 +3,10 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 
+import {
+  SitePreloader,
+} from "@/components/website/site-preloader";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -25,8 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.variable}>{children}</body>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+    >
+      <body className={inter.variable}>
+          <SitePreloader />
+        {children}
+      </body>
     </html>
   );
 }
