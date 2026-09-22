@@ -65,7 +65,8 @@ model User {
   @@index([email])
 
 
-  @@map("user")}
+  @@map("user")
+}
 
 model MachineCategory {
   id          String  @id @default(cuid())
@@ -86,7 +87,8 @@ model MachineCategory {
   @@index([sortOrder])
 
 
-  @@map("machinecategory")}
+  @@map("machinecategory")
+}
 
 model Machine {
   id String @id @default(cuid())
@@ -128,7 +130,8 @@ model Machine {
   @@index([featured])
 
 
-  @@map("machine")}
+  @@map("machine")
+}
 
 model MachineModel {
   id String @id @default(cuid())
@@ -158,7 +161,8 @@ model MachineModel {
   @@index([sortOrder])
 
 
-  @@map("machinemodel")}
+  @@map("machinemodel")
+}
 
 model MachineSpecification {
   id String @id @default(cuid())
@@ -181,7 +185,8 @@ model MachineSpecification {
   @@index([sortOrder])
 
 
-  @@map("machinespecification")}
+  @@map("machinespecification")
+}
 
 model MachineFeature {
   id String @id @default(cuid())
@@ -208,7 +213,8 @@ model MachineFeature {
   @@index([sortOrder])
 
 
-  @@map("machinefeature")}
+  @@map("machinefeature")
+}
 
 model Media {
   id String @id @default(cuid())
@@ -241,7 +247,8 @@ model Media {
   @@index([createdAt])
 
 
-  @@map("media")}
+  @@map("media")
+}
 
 model MachineMedia {
   id String @id @default(cuid())
@@ -267,7 +274,8 @@ model MachineMedia {
   @@index([sortOrder])
 
 
-  @@map("machinemedia")}
+  @@map("machinemedia")
+}
 
 model Installation {
   id String @id @default(cuid())
@@ -307,7 +315,8 @@ model Installation {
   @@index([status])
 
 
-  @@map("installation")}
+  @@map("installation")
+}
 
 model InstallationMachine {
   id String @id @default(cuid())
@@ -325,7 +334,8 @@ model InstallationMachine {
   @@index([machineId])
 
 
-  @@map("installationmachine")}
+  @@map("installationmachine")
+}
 
 model InstallationMedia {
   id String @id @default(cuid())
@@ -343,7 +353,8 @@ model InstallationMedia {
   @@index([mediaId])
 
 
-  @@map("installationmedia")}
+  @@map("installationmedia")
+}
 
 model ServiceCentre {
   id String @id @default(cuid())
@@ -379,7 +390,8 @@ model ServiceCentre {
   @@index([sortOrder])
 
 
-  @@map("servicecentre")}
+  @@map("servicecentre")
+}
 
 model Testimonial {
   id String @id @default(cuid())
@@ -406,7 +418,8 @@ model Testimonial {
   @@index([sortOrder])
 
 
-  @@map("testimonial")}
+  @@map("testimonial")
+}
 
 model Enquiry {
   id String @id @default(cuid())
@@ -460,7 +473,8 @@ model Enquiry {
   @@index([createdAt])
 
 
-  @@map("enquiry")}
+  @@map("enquiry")
+}
 
 model BrochureLead {
   id String @id @default(cuid())
@@ -486,7 +500,8 @@ model BrochureLead {
   @@index([createdAt])
 
 
-  @@map("brochurelead")}
+  @@map("brochurelead")
+}
 
 model MachineCrossSell {
   id String @id @default(cuid())
@@ -506,7 +521,8 @@ model MachineCrossSell {
   @@index([targetMachineId])
 
 
-  @@map("machinecrosssell")}
+  @@map("machinecrosssell")
+}
 
 model SeoMetadata {
   id String @id @default(cuid())
@@ -530,7 +546,8 @@ model SeoMetadata {
   updatedAt DateTime @updatedAt
 
 
-  @@map("seometadata")}
+  @@map("seometadata")
+}
 
 model SiteSetting {
   id String @id @default(cuid())
@@ -544,4 +561,5 @@ model SiteSetting {
   @@index([key])
 
 
-  @@map("sitesetting")}
+  @@map("sitesetting")
+}
