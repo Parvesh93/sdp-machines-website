@@ -63,7 +63,9 @@ model User {
   updatedAt DateTime @updatedAt
 
   @@index([email])
-}
+
+
+  @@map("user")}
 
 model MachineCategory {
   id          String  @id @default(cuid())
@@ -82,7 +84,9 @@ model MachineCategory {
 
   @@index([slug])
   @@index([sortOrder])
-}
+
+
+  @@map("machinecategory")}
 
 model Machine {
   id String @id @default(cuid())
@@ -122,7 +126,9 @@ model Machine {
   @@index([slug])
   @@index([status])
   @@index([featured])
-}
+
+
+  @@map("machine")}
 
 model MachineModel {
   id String @id @default(cuid())
@@ -150,7 +156,9 @@ model MachineModel {
   @@index([machineId])
   @@index([modelNumber])
   @@index([sortOrder])
-}
+
+
+  @@map("machinemodel")}
 
 model MachineSpecification {
   id String @id @default(cuid())
@@ -171,7 +179,9 @@ model MachineSpecification {
   @@index([machineModelId])
   @@index([groupName])
   @@index([sortOrder])
-}
+
+
+  @@map("machinespecification")}
 
 model MachineFeature {
   id String @id @default(cuid())
@@ -196,7 +206,9 @@ model MachineFeature {
 
   @@index([machineId])
   @@index([sortOrder])
-}
+
+
+  @@map("machinefeature")}
 
 model Media {
   id String @id @default(cuid())
@@ -227,7 +239,9 @@ model Media {
 
   @@index([type])
   @@index([createdAt])
-}
+
+
+  @@map("media")}
 
 model MachineMedia {
   id String @id @default(cuid())
@@ -251,7 +265,9 @@ model MachineMedia {
   @@index([machineId])
   @@index([mediaId])
   @@index([sortOrder])
-}
+
+
+  @@map("machinemedia")}
 
 model Installation {
   id String @id @default(cuid())
@@ -289,7 +305,9 @@ model Installation {
   @@index([installationYear])
   @@index([featured])
   @@index([status])
-}
+
+
+  @@map("installation")}
 
 model InstallationMachine {
   id String @id @default(cuid())
@@ -305,7 +323,9 @@ model InstallationMachine {
   @@unique([installationId, machineId])
   @@index([installationId])
   @@index([machineId])
-}
+
+
+  @@map("installationmachine")}
 
 model InstallationMedia {
   id String @id @default(cuid())
@@ -321,7 +341,9 @@ model InstallationMedia {
   @@unique([installationId, mediaId])
   @@index([installationId])
   @@index([mediaId])
-}
+
+
+  @@map("installationmedia")}
 
 model ServiceCentre {
   id String @id @default(cuid())
@@ -355,7 +377,9 @@ model ServiceCentre {
   @@index([type])
   @@index([state])
   @@index([sortOrder])
-}
+
+
+  @@map("servicecentre")}
 
 model Testimonial {
   id String @id @default(cuid())
@@ -380,7 +404,9 @@ model Testimonial {
 
   @@index([featured])
   @@index([sortOrder])
-}
+
+
+  @@map("testimonial")}
 
 model Enquiry {
   id String @id @default(cuid())
@@ -432,7 +458,9 @@ model Enquiry {
   @@index([status])
   @@index([source])
   @@index([createdAt])
-}
+
+
+  @@map("enquiry")}
 
 model BrochureLead {
   id String @id @default(cuid())
@@ -456,7 +484,9 @@ model BrochureLead {
   @@index([phone])
   @@index([brochureKey])
   @@index([createdAt])
-}
+
+
+  @@map("brochurelead")}
 
 model MachineCrossSell {
   id String @id @default(cuid())
@@ -474,7 +504,9 @@ model MachineCrossSell {
   @@unique([sourceMachineId, targetMachineId])
   @@index([sourceMachineId])
   @@index([targetMachineId])
-}
+
+
+  @@map("machinecrosssell")}
 
 model SeoMetadata {
   id String @id @default(cuid())
@@ -496,7 +528,9 @@ model SeoMetadata {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
+
+
+  @@map("seometadata")}
 
 model SiteSetting {
   id String @id @default(cuid())
@@ -508,4 +542,6 @@ model SiteSetting {
   updatedAt DateTime @updatedAt
 
   @@index([key])
-}
+
+
+  @@map("sitesetting")}
