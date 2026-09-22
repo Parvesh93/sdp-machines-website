@@ -88,10 +88,10 @@ export default async function MachinePage({
         title={machine.name}
         description={`Manage ${machine.name} content, models and interactive machine data.`}
         actions={
-          <div className="admin-page-actions">
+          <div className="flex items-start gap-2.5">
             <Link
               href="/admin/machines"
-              className="admin-secondary-button"
+              className="inline-flex min-h-10 items-center justify-center rounded-[5px] border border-[#d6d6d1] bg-white px-4 text-[13px] font-semibold text-[#333333] transition-colors hover:border-[#aaaaa5]"
             >
               Back
             </Link>
@@ -99,7 +99,7 @@ export default async function MachinePage({
             <Link
               href={`/machines/${machine.slug}`}
               target="_blank"
-              className="admin-secondary-button"
+              className="inline-flex min-h-10 items-center justify-center rounded-[5px] border border-[#d6d6d1] bg-white px-4 text-[13px] font-semibold text-[#333333] transition-colors hover:border-[#aaaaa5]"
             >
               View page
             </Link>
@@ -108,7 +108,7 @@ export default async function MachinePage({
       />
 
       <nav
-        className="admin-workspace-tabs"
+        className="mb-[18px] flex gap-1 overflow-x-auto rounded-[7px] bg-[#eaeae6] p-1"
         aria-label="Machine workspace"
       >
         {tabs.map((tab) => {
@@ -121,8 +121,8 @@ export default async function MachinePage({
               href={href}
               className={
                 tab.label === "Overview"
-                  ? "admin-workspace-tab admin-workspace-tab-active"
-                  : "admin-workspace-tab"
+                  ? "inline-flex min-h-9 shrink-0 items-center rounded-[5px] bg-white px-[13px] text-[12px] font-semibold text-[#161616] shadow-[0_1px_2px_rgba(0,0,0,0.06)]"
+                  : "inline-flex min-h-9 shrink-0 items-center rounded-[5px] px-[13px] text-[12px] font-semibold text-[#6f6f6f] transition-colors hover:text-[#161616]"
               }
             >
               {tab.label}
@@ -131,43 +131,43 @@ export default async function MachinePage({
         })}
       </nav>
 
-      <section className="admin-machine-summary">
-        <div>
-          <span>
+      <section className="mb-[18px] grid grid-cols-1 overflow-hidden rounded-lg border border-[#e1e1dd] bg-white sm:grid-cols-2 lg:grid-cols-4">
+        <div className="min-w-0 border-b border-[#ededeb] p-[18px_20px] sm:border-r lg:border-b-0 last:border-r-0">
+          <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.08em] text-[#8a8a8a]">
             Category
           </span>
 
-          <strong>
+          <strong className="block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] text-[#252525]">
             {machine.category.name}
           </strong>
         </div>
 
-        <div>
-          <span>
+        <div className="min-w-0 border-b border-[#ededeb] p-[18px_20px] sm:border-r lg:border-b-0 last:border-r-0">
+          <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.08em] text-[#8a8a8a]">
             Models
           </span>
 
-          <strong>
+          <strong className="block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] text-[#252525]">
             {machine.models.length}
           </strong>
         </div>
 
-        <div>
-          <span>
+        <div className="min-w-0 border-b border-[#ededeb] p-[18px_20px] sm:border-r lg:border-b-0 last:border-r-0">
+          <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.08em] text-[#8a8a8a]">
             Status
           </span>
 
-          <strong>
+          <strong className="block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] text-[#252525]">
             {machine.status}
           </strong>
         </div>
 
-        <div>
-          <span>
+        <div className="min-w-0 border-b border-[#ededeb] p-[18px_20px] sm:border-r lg:border-b-0 last:border-r-0">
+          <span className="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.08em] text-[#8a8a8a]">
             URL
           </span>
 
-          <strong>
+          <strong className="block overflow-hidden text-ellipsis whitespace-nowrap text-[13px] text-[#252525]">
             /machines/{machine.slug}
           </strong>
         </div>
