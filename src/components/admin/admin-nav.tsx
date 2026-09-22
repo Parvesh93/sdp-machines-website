@@ -21,7 +21,7 @@ export function AdminNav() {
 
   return (
     <nav
-      className="admin-nav"
+      className="flex flex-1 gap-1 overflow-x-auto p-3 md:block md:overflow-y-auto md:px-3 md:py-[18px]"
       aria-label="Admin navigation"
     >
       {adminNavigation.map((item) => {
@@ -34,15 +34,13 @@ export function AdminNav() {
           <Link
             key={item.href}
             href={item.href}
-            className={
+            className={`relative flex min-h-[42px] shrink-0 items-center rounded-md px-3 text-[14px] transition-colors duration-150 md:mb-[3px] ${
               active
-                ? "admin-nav-link admin-nav-link-active"
-                : "admin-nav-link"
-            }
+                ? "bg-white/[0.08] text-white before:absolute before:bottom-[9px] before:left-0 before:top-[9px] before:w-0.5 before:bg-[#f36b21] before:content-['']"
+                : "text-[#a9a9a9] hover:bg-white/[0.06] hover:text-white"
+            }`}
           >
-            <span>
-              {item.label}
-            </span>
+            <span>{item.label}</span>
           </Link>
         );
       })}
