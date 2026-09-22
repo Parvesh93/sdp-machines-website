@@ -41,7 +41,7 @@ export default async function NewModelPage({
         actions={
           <Link
             href={`/admin/machines/${machine.id}/models`}
-            className="admin-secondary-button"
+            className="inline-flex min-h-10 items-center justify-center rounded-[5px] border border-[#d6d6d1] bg-white px-4 text-[13px] font-semibold text-[#333333] transition-colors hover:border-[#aaaaa5]"
           >
             Back to models
           </Link>
