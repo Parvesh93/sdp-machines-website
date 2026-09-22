@@ -274,21 +274,9 @@ export function ServiceNetwork() {
                 absolute
                 inset-0
                 opacity-35
+                [background-image:linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)]
+                [background-size:55px_55px]
               "
-              style={{
-                backgroundImage: `
-                  linear-gradient(
-                    rgba(255,255,255,.055) 1px,
-                    transparent 1px
-                  ),
-                  linear-gradient(
-                    90deg,
-                    rgba(255,255,255,.055) 1px,
-                    transparent 1px
-                  )
-                `,
-                backgroundSize: "55px 55px",
-              }}
             />
 
             {/* ACCENT GLOW */}
