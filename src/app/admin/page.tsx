@@ -1,6 +1,18 @@
 import { AdminPageHeader } from "@/components/admin/admin-page-header";
 import { prisma } from "@/lib/db/prisma";
 
+async function safeCount(
+  label: string,
+  query: () => Promise<number>,
+) {
+  try {
+    return await query();
+  } catch (error) {
+    console.error(`[admin-dashboard] Unable to count ${label}:`, error);
+    return 0;
+  }
+}
+
 export default async function AdminDashboardPage() {
   const [
     machineCount,
@@ -8,10 +20,10 @@ export default async function AdminDashboardPage() {
     installationCount,
     mediaCount,
   ] = await Promise.all([
-    prisma.machine.count(),
-    prisma.enquiry.count(),
-    prisma.installation.count(),
-    prisma.media.count(),
+    safeCount("machines", () => prisma.machine.count()),
+    safeCount("enquiries", () => prisma.enquiry.count()),
+    safeCount("installations", () => prisma.installation.count()),
+    safeCount("media", () => prisma.media.count()),
   ]);
 
   const stats = [
@@ -47,13 +59,8 @@ export default async function AdminDashboardPage() {
             key={stat.label}
             className="admin-stat-card"
           >
-            <span>
-              {stat.label}
-            </span>
-
-            <strong>
-              {stat.value}
-            </strong>
+            <span>{stat.label}</span>
+            <strong>{stat.value}</strong>
           </article>
         ))}
       </section>
