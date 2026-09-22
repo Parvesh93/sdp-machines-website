@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "admin:create": "tsx scripts/create-admin.ts"
+    "admin:create": "tsx scripts/create-admin.ts",
+    "db:check": "tsx scripts/db-check.ts"
   },
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.9.1",
