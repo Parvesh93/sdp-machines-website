@@ -43,32 +43,37 @@ export const {
 
         const { email, password } = parsed.data;
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email,
-          },
-        });
+        try {
+          const user = await prisma.user.findUnique({
+            where: {
+              email,
+            },
+          });
 
-        if (!user || !user.active) {
-          return null;
+          if (!user || !user.active) {
+            return null;
+          }
+
+          const passwordMatches =
+            await bcrypt.compare(
+              password,
+              user.passwordHash,
+            );
+
+          if (!passwordMatches) {
+            return null;
+          }
+
+          return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+          };
+        } catch (error) {
+          console.error("[auth][authorize] Database/auth error:", error);
+          throw error;
         }
-
-        const passwordMatches =
-          await bcrypt.compare(
-            password,
-            user.passwordHash
-          );
-
-        if (!passwordMatches) {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-        };
       },
     }),
   ],
