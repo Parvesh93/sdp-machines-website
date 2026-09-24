@@ -13,6 +13,9 @@ import {
 } from "react";
 
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Temporary stock footage from Pexels.
 // Replace with final SDP machine footage when supplied by the client.
@@ -34,13 +37,13 @@ export function Hero() {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      const timeline = gsap.timeline({
+      const intro = gsap.timeline({
         defaults: {
           ease: "power3.out",
         },
       });
 
-      timeline
+      intro
         .from(".hero-kicker", {
           opacity: 0,
           y: 14,
@@ -74,6 +77,51 @@ export function Hero() {
           },
           "-=0.25",
         );
+
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1.15,
+          },
+        })
+        .to(
+          ".hero-center-copy",
+          {
+            scale: 0.72,
+            y: -42,
+            opacity: 0.16,
+            ease: "none",
+          },
+          0,
+        )
+        .to(
+          ".hero-scroll",
+          {
+            opacity: 0,
+            y: -12,
+            ease: "none",
+          },
+          0,
+        )
+        .to(
+          ".hero-video-media",
+          {
+            scale: 1.045,
+            ease: "none",
+          },
+          0,
+        )
+        .to(
+          ".hero-dim-layer",
+          {
+            opacity: 0.7,
+            ease: "none",
+          },
+          0,
+        );
     }, section);
 
     return () => {
@@ -84,76 +132,82 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative grid min-h-svh place-items-center overflow-hidden bg-[#111111] text-white"
+      className="relative h-[145svh] bg-[#111111] text-white max-[700px]:h-[125svh]"
     >
-      <div className="absolute inset-0">
-        {!videoFailed ? (
-          <video
-            className="h-full w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/images/installations/installation-01.jpeg"
-            onError={() => setVideoFailed(true)}
-            aria-label="Industrial machine operating in a factory"
-          >
-            <source
-              src={heroVideoUrl}
-              type="video/mp4"
-            />
-          </video>
-        ) : (
-          <Image
-            src="/images/installations/installation-01.jpeg"
-            alt="SDP machine operating in a stone processing facility"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-        )}
-
-        <div className="absolute inset-0 bg-black/55" />
-      </div>
-
-      <div className="relative z-10 mx-auto flex min-h-svh w-full max-w-[1600px] items-center justify-center px-[5vw] py-[130px] max-[650px]:px-[18px]">
-        <div className="mx-auto max-w-[1180px] text-center">
-          <span className="hero-kicker mb-7 inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.19em] text-white/60 before:h-px before:w-7 before:bg-[var(--site-accent)] before:content-[''] after:h-px after:w-7 after:bg-[var(--site-accent)] after:content-['']">
-            SDP Machines / Ajmer, India
-          </span>
-
-          <h1 className="m-0 text-[clamp(62px,9.3vw,154px)] font-medium leading-[0.82] tracking-[-0.078em]">
-            <span className="hero-heading-line block">
-              Built in Ajmer.
-            </span>
-            <span className="hero-heading-line block text-white/72">
-              Engineered to run.
-            </span>
-          </h1>
-
-          <div className="hero-action mt-9 flex justify-center">
-            <Link
-              href="/machines"
-              className="group inline-flex h-[50px] items-center justify-center gap-7 border border-white/30 bg-black/15 px-5 text-[10px] font-bold uppercase tracking-[0.08em] text-white backdrop-blur-sm transition duration-200 hover:border-[var(--site-accent)] hover:bg-[var(--site-accent)]"
+      <div className="sticky top-0 h-svh overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          {!videoFailed ? (
+            <video
+              className="hero-video-media h-full w-full scale-100 object-cover will-change-transform"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/images/installations/installation-01.jpeg"
+              onError={() => setVideoFailed(true)}
+              aria-label="Industrial machine operating in a factory"
             >
-              Explore machines
-              <ArrowUpRight
-                size={16}
-                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              <source
+                src={heroVideoUrl}
+                type="video/mp4"
               />
-            </Link>
+            </video>
+          ) : (
+            <Image
+              src="/images/installations/installation-01.jpeg"
+              alt="SDP machine operating in a stone processing facility"
+              fill
+              priority
+              sizes="100vw"
+              className="hero-video-media scale-100 object-cover will-change-transform"
+            />
+          )}
+
+          <div className="hero-dim-layer absolute inset-0 bg-black opacity-55" />
+
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[34vh] bg-[linear-gradient(to_bottom,transparent_0%,rgba(0,0,0,0.15)_42%,rgba(0,0,0,0.58)_100%)]" />
+
+          <div className="pointer-events-none absolute -bottom-[8vh] left-1/2 h-[24vh] w-[88vw] -translate-x-1/2 rounded-[50%] bg-black/30 blur-[55px]" />
+        </div>
+
+        <div className="relative z-10 mx-auto flex h-svh w-full max-w-[1600px] items-center justify-center px-[5vw] py-[130px] max-[650px]:px-[18px]">
+          <div className="hero-center-copy mx-auto max-w-[1180px] origin-center text-center will-change-transform">
+            <span className="hero-kicker mb-7 inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.19em] text-white/60 before:h-px before:w-7 before:bg-[var(--site-accent)] before:content-[''] after:h-px after:w-7 after:bg-[var(--site-accent)] after:content-['']">
+              SDP Machines / Ajmer, India
+            </span>
+
+            <h1 className="m-0 text-[clamp(62px,9.3vw,154px)] font-medium leading-[0.82] tracking-[-0.078em]">
+              <span className="hero-heading-line block">
+                Built in Ajmer.
+              </span>
+              <span className="hero-heading-line block text-white/72">
+                Engineered to run.
+              </span>
+            </h1>
+
+            <div className="hero-action mt-9 flex justify-center">
+              <Link
+                href="/machines"
+                className="group inline-flex h-[50px] items-center justify-center gap-7 border border-white/30 bg-black/15 px-5 text-[10px] font-bold uppercase tracking-[0.08em] text-white backdrop-blur-sm transition duration-200 hover:border-[var(--site-accent)] hover:bg-[var(--site-accent)]"
+              >
+                Explore machines
+                <ArrowUpRight
+                  size={16}
+                  className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="hero-scroll absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5 text-[8px] font-semibold uppercase tracking-[0.14em] text-white/45">
-        <span>Scroll</span>
-        <ArrowDown
-          size={14}
-          className="text-[var(--site-accent)]"
-        />
+        <div className="hero-scroll absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5 text-[8px] font-semibold uppercase tracking-[0.14em] text-white/45">
+          <span>Scroll</span>
+          <ArrowDown
+            size={14}
+            className="text-[var(--site-accent)]"
+          />
+        </div>
       </div>
     </section>
   );
