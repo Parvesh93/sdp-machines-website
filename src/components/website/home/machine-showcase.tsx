@@ -6,7 +6,6 @@ import { ArrowUpRight } from "lucide-react";
 import {
   useEffect,
   useRef,
-  useState,
 } from "react";
 
 import gsap from "gsap";
@@ -55,11 +54,6 @@ const machines = [
 
 export function MachineShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [activeIndex, setActiveIndex] =
-    useState(0);
-
-  const activeMachine = machines[activeIndex];
-
   useEffect(() => {
     const section = sectionRef.current;
 
@@ -71,42 +65,105 @@ export function MachineShowcase() {
           ".machine-scroll-chapter",
         );
 
-      chapters.forEach((chapter, index) => {
-        ScrollTrigger.create({
-          trigger: chapter,
-          start: "top 58%",
-          end: "bottom 42%",
-          onEnter: () => setActiveIndex(index),
-          onEnterBack: () =>
-            setActiveIndex(index),
+      const imagePanels =
+        gsap.utils.toArray<HTMLElement>(
+          ".machine-image-panel",
+        );
+
+      // Desktop: the image column stays sticky. Every incoming image is
+      // physically tied to scroll position, so stopping/reversing the
+      // scroll immediately stops/reverses the image transition.
+      const media = gsap.matchMedia();
+
+      media.add("(min-width: 1024px)", () => {
+        imagePanels.forEach((panel, index) => {
+          gsap.set(panel, {
+            yPercent: index === 0 ? 0 : 100,
+          });
         });
 
-        const content =
+        chapters.slice(1).forEach((chapter, chapterIndex) => {
+          const imageIndex = chapterIndex + 1;
+          const incoming = imagePanels[imageIndex];
+          const outgoing = imagePanels[imageIndex - 1];
+
+          if (!incoming) return;
+
+          gsap.fromTo(
+            incoming,
+            {
+              yPercent: 100,
+            },
+            {
+              yPercent: 0,
+              ease: "none",
+              scrollTrigger: {
+                trigger: chapter,
+                start: "top bottom",
+                end: "top 86px",
+                scrub: true,
+                invalidateOnRefresh: true,
+              },
+            },
+          );
+
+          if (outgoing) {
+            gsap.fromTo(
+              outgoing.querySelector(
+                ".machine-image-media",
+              ),
+              {
+                scale: 1,
+                yPercent: 0,
+              },
+              {
+                scale: 1.035,
+                yPercent: -3,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: chapter,
+                  start: "top bottom",
+                  end: "top 86px",
+                  scrub: true,
+                  invalidateOnRefresh: true,
+                },
+              },
+            );
+          }
+        });
+      });
+
+      chapters.forEach((chapter) => {
+        const copy =
           chapter.querySelector(
             ".machine-scroll-copy",
           );
 
-        if (content) {
-          gsap.fromTo(
-            content,
-            {
-              opacity: 0.28,
-              y: 48,
+        if (!copy) return;
+
+        gsap.fromTo(
+          copy,
+          {
+            opacity: 0.32,
+            y: 54,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: chapter,
+              start: "top 84%",
+              end: "top 50%",
+              scrub: true,
             },
-            {
-              opacity: 1,
-              y: 0,
-              ease: "none",
-              scrollTrigger: {
-                trigger: chapter,
-                start: "top 82%",
-                end: "top 48%",
-                scrub: 0.7,
-              },
-            },
-          );
-        }
+          },
+        );
       });
+
+      return () => {
+        media.revert();
+      };
     }, section);
 
     return () => {
@@ -149,46 +206,44 @@ export function MachineShowcase() {
               {machines.map((machine, index) => (
                 <div
                   key={machine.image}
-                  className={`absolute inset-0 will-change-transform transition-transform duration-[900ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
-                    index <= activeIndex
-                      ? "translate-y-0"
-                      : "translate-y-full"
-                  }`}
+                  className="machine-image-panel absolute inset-0 overflow-hidden will-change-transform"
                   style={{ zIndex: index + 1 }}
                 >
-                  <Image
-                    src={machine.image}
-                    alt={machine.title}
-                    fill
-                    sizes="58vw"
-                    className="object-cover"
-                    priority={index === 0}
-                  />
+                  <div className="machine-image-media absolute inset-0 will-change-transform">
+                    <Image
+                      src={machine.image}
+                      alt={machine.title}
+                      fill
+                      sizes="58vw"
+                      className="object-cover"
+                      priority={index === 0}
+                    />
+                  </div>
+
+                  <div className="absolute inset-0 bg-black/18" />
+
+                  <div className="absolute left-7 top-7 z-10 flex items-center gap-3 text-[8px] font-bold uppercase tracking-[0.14em] text-white/55">
+                    <span className="h-2 w-2 bg-[var(--site-accent)]" />
+                    Machine system
+                  </div>
+
+                  <div className="absolute bottom-7 left-7 right-7 z-10 flex items-end justify-between border-t border-white/25 pt-4 text-white">
+                    <div>
+                      <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-white/55">
+                        {machine.eyebrow}
+                      </span>
+
+                      <strong className="mt-2 block text-[clamp(30px,3.5vw,54px)] font-medium tracking-[-0.05em]">
+                        {machine.title}
+                      </strong>
+                    </div>
+
+                    <span className="text-[14px] tabular-nums text-[var(--site-accent)]">
+                      {machine.number}
+                    </span>
+                  </div>
                 </div>
               ))}
-
-              <div className="absolute inset-0 bg-black/18" />
-
-              <div className="absolute left-7 top-7 z-10 flex items-center gap-3 text-[8px] font-bold uppercase tracking-[0.14em] text-white/55">
-                <span className="h-2 w-2 bg-[var(--site-accent)]" />
-                Machine system
-              </div>
-
-              <div className="absolute bottom-7 left-7 right-7 z-10 flex items-end justify-between border-t border-white/25 pt-4 text-white">
-                <div>
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-white/55">
-                    {activeMachine.eyebrow}
-                  </span>
-
-                  <strong className="mt-2 block text-[clamp(30px,3.5vw,54px)] font-medium tracking-[-0.05em]">
-                    {activeMachine.title}
-                  </strong>
-                </div>
-
-                <span className="text-[14px] tabular-nums text-[var(--site-accent)]">
-                  {activeMachine.number}
-                </span>
-              </div>
             </div>
           </div>
 
