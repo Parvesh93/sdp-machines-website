@@ -168,25 +168,32 @@ export function MachineShowcase() {
       className="relative z-30 -mt-[38svh] bg-[#f2f0ea] text-[#171817] shadow-[0_-42px_90px_rgba(0,0,0,0.34)] max-[700px]:-mt-[18svh]"
     >
       <div className="pointer-events-none absolute -top-12 left-[8%] right-[8%] h-12 rounded-[50%] bg-black/25 blur-[30px]" />
-      <div className="relative z-[1] mx-auto w-full max-w-[1600px] px-[5vw] pb-14 pt-[110px] max-[650px]:px-[18px] max-[650px]:pt-20">
-        <div className="grid gap-8 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
+      <div className="relative z-[1] mx-auto w-full max-w-[1600px] px-[5vw] py-[62px] max-[650px]:px-[18px] max-[650px]:py-12">
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_.8fr] lg:items-end">
           <div>
-            <span className="mb-5 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
+            <span className="mb-4 flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)] before:h-px before:w-7 before:bg-[var(--site-accent)] before:content-['']">
               02 / Machine Range
             </span>
 
-            <h2 className="m-0 max-w-[1000px] text-[clamp(52px,6.8vw,112px)] font-medium leading-[0.88] tracking-[-0.07em]">
+            <h2 className="m-0 max-w-[820px] text-[clamp(42px,4.9vw,76px)] font-medium leading-[0.94] tracking-[-0.055em]">
               Machines for
-              <span className="block text-[#9a9992]">
+              <span className="ml-[0.18em] text-[#9a9992] max-[700px]:ml-0 max-[700px]:block">
                 continuous production.
               </span>
             </h2>
           </div>
 
-          <p className="m-0 max-w-[380px] text-[12px] leading-[1.8] text-[#686a63] lg:justify-self-end">
-            Scroll through SDP&apos;s four primary machine lines. Each image
-            changes as the corresponding production system comes into focus.
-          </p>
+          <div className="lg:justify-self-end">
+            <p className="m-0 max-w-[340px] text-[11px] leading-[1.7] text-[#686a63]">
+              Four core machine lines engineered for cutting, finishing and
+              material handling in continuous stone production.
+            </p>
+
+            <div className="mt-5 flex items-center gap-3 text-[8px] font-semibold uppercase tracking-[0.13em] text-[#8f8f88]">
+              <span className="h-[6px] w-[6px] bg-[var(--site-accent)]" />
+              Scroll to explore
+            </div>
+          </div>
         </div>
       </div>
 
