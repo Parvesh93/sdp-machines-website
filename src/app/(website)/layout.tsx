@@ -11,7 +11,7 @@ export default function WebsiteLayout({
   children,
 }: WebsiteLayoutProps) {
   return (
-    <div className="min-h-screen bg-[var(--site-bg)] text-[var(--site-text)] [--site-accent:#f2c94c] [--site-bg:#0b0c0c] [--site-line:rgba(255,255,255,0.12)] [--site-muted:#989a96] [--site-surface:#121313] [--site-text:#f2f0ea]">
+    <div className="min-h-screen bg-[var(--site-bg)] text-[var(--site-text)] [--site-accent:#f36b21] [--site-bg:#111111] [--site-line:rgba(255,255,255,0.12)] [--site-muted:#8b8b84] [--site-surface:#181818] [--site-text:#f2f0ea]">
       <Header />
 
       <main>{children}</main>
