@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import {
   useEffect,
   useRef,
+  useState,
 } from "react";
 
 import gsap from "gsap";
@@ -54,6 +55,8 @@ const machines = [
 
 export function MachineShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
   useEffect(() => {
     const section = sectionRef.current;
 
@@ -78,58 +81,46 @@ export function MachineShowcase() {
       media.add("(min-width: 1024px)", () => {
         imagePanels.forEach((panel, index) => {
           gsap.set(panel, {
-            yPercent: index === 0 ? 0 : 100,
+            clipPath:
+              index === 0
+                ? "inset(0% 0% 0% 0%)"
+                : "inset(100% 0% 0% 0%)",
+          });
+        });
+
+        chapters.forEach((chapter, index) => {
+          ScrollTrigger.create({
+            trigger: chapter,
+            start: "top 52%",
+            end: "bottom 52%",
+            onEnter: () => setActiveIndex(index),
+            onEnterBack: () => setActiveIndex(index),
           });
         });
 
         chapters.slice(1).forEach((chapter, chapterIndex) => {
           const imageIndex = chapterIndex + 1;
           const incoming = imagePanels[imageIndex];
-          const outgoing = imagePanels[imageIndex - 1];
 
           if (!incoming) return;
 
           gsap.fromTo(
             incoming,
             {
-              yPercent: 100,
+              clipPath: "inset(100% 0% 0% 0%)",
             },
             {
-              yPercent: 0,
+              clipPath: "inset(0% 0% 0% 0%)",
               ease: "none",
               scrollTrigger: {
                 trigger: chapter,
                 start: "top bottom",
-                end: "top 86px",
+                end: "top top",
                 scrub: true,
                 invalidateOnRefresh: true,
               },
             },
           );
-
-          if (outgoing) {
-            gsap.fromTo(
-              outgoing.querySelector(
-                ".machine-image-media",
-              ),
-              {
-                scale: 1,
-                yPercent: 0,
-              },
-              {
-                scale: 1.035,
-                yPercent: -3,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: chapter,
-                  start: "top bottom",
-                  end: "top 86px",
-                  scrub: true,
-                  invalidateOnRefresh: true,
-                },
-              },
-            );
-          }
         });
       });
 
@@ -201,49 +192,49 @@ export function MachineShowcase() {
 
       <div className="relative z-[1] border-t border-[#c9c8c1]">
         <div className="mx-auto grid w-full max-w-[1600px] lg:grid-cols-[1.15fr_.85fr]">
-          <div className="hidden border-r border-[#c9c8c1] lg:block">
-            <div className="sticky top-[86px] h-[calc(100vh-86px)] min-h-[620px] overflow-hidden bg-[#171817]">
+          <div className="hidden self-start border-r border-[#c9c8c1] lg:block">
+            <div className="sticky top-0 h-svh overflow-hidden bg-[#171817]">
               {machines.map((machine, index) => (
                 <div
                   key={machine.image}
-                  className="machine-image-panel absolute inset-0 overflow-hidden will-change-transform"
+                  className="machine-image-panel absolute inset-0 overflow-hidden [will-change:clip-path]"
                   style={{ zIndex: index + 1 }}
                 >
-                  <div className="machine-image-media absolute inset-0 will-change-transform">
-                    <Image
-                      src={machine.image}
-                      alt={machine.title}
-                      fill
-                      sizes="58vw"
-                      className="object-cover"
-                      priority={index === 0}
-                    />
-                  </div>
+                  <Image
+                    src={machine.image}
+                    alt={machine.title}
+                    fill
+                    sizes="58vw"
+                    className="object-cover"
+                    priority={index === 0}
+                  />
 
                   <div className="absolute inset-0 bg-black/18" />
-
-                  <div className="absolute left-7 top-7 z-10 flex items-center gap-3 text-[8px] font-bold uppercase tracking-[0.14em] text-white/55">
-                    <span className="h-2 w-2 bg-[var(--site-accent)]" />
-                    Machine system
-                  </div>
-
-                  <div className="absolute bottom-7 left-7 right-7 z-10 flex items-end justify-between border-t border-white/25 pt-4 text-white">
-                    <div>
-                      <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-white/55">
-                        {machine.eyebrow}
-                      </span>
-
-                      <strong className="mt-2 block text-[clamp(30px,3.5vw,54px)] font-medium tracking-[-0.05em]">
-                        {machine.title}
-                      </strong>
-                    </div>
-
-                    <span className="text-[14px] tabular-nums text-[var(--site-accent)]">
-                      {machine.number}
-                    </span>
-                  </div>
                 </div>
               ))}
+
+              <div className="pointer-events-none absolute inset-0 z-20">
+                <div className="absolute left-7 top-[110px] flex items-center gap-3 text-[8px] font-bold uppercase tracking-[0.14em] text-white/55">
+                  <span className="h-2 w-2 bg-[var(--site-accent)]" />
+                  Machine system
+                </div>
+
+                <div className="absolute bottom-8 left-7 right-7 flex items-end justify-between border-t border-white/25 pt-4 text-white">
+                  <div>
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-white/55">
+                      {machines[activeIndex].eyebrow}
+                    </span>
+
+                    <strong className="mt-2 block text-[clamp(30px,3.5vw,54px)] font-medium tracking-[-0.05em]">
+                      {machines[activeIndex].title}
+                    </strong>
+                  </div>
+
+                  <span className="text-[14px] tabular-nums text-[var(--site-accent)]">
+                    {machines[activeIndex].number}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
