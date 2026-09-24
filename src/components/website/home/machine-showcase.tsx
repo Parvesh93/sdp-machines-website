@@ -117,9 +117,10 @@ export function MachineShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#f2f0ea] text-[#171817]"
+      className="relative z-30 -mt-[38svh] bg-[#f2f0ea] text-[#171817] shadow-[0_-42px_90px_rgba(0,0,0,0.34)] max-[700px]:-mt-[18svh]"
     >
-      <div className="mx-auto w-full max-w-[1600px] px-[5vw] pb-14 pt-[110px] max-[650px]:px-[18px] max-[650px]:pt-20">
+      <div className="pointer-events-none absolute -top-12 left-[8%] right-[8%] h-12 rounded-[50%] bg-black/25 blur-[30px]" />
+      <div className="relative z-[1] mx-auto w-full max-w-[1600px] px-[5vw] pb-14 pt-[110px] max-[650px]:px-[18px] max-[650px]:pt-20">
         <div className="grid gap-8 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
           <div>
             <span className="mb-5 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
@@ -141,7 +142,7 @@ export function MachineShowcase() {
         </div>
       </div>
 
-      <div className="border-t border-[#c9c8c1]">
+      <div className="relative z-[1] border-t border-[#c9c8c1]">
         <div className="mx-auto grid w-full max-w-[1600px] lg:grid-cols-[1.15fr_.85fr]">
           <div className="hidden border-r border-[#c9c8c1] lg:block">
             <div className="sticky top-[86px] h-[calc(100vh-86px)] min-h-[620px] overflow-hidden bg-[#171817]">
