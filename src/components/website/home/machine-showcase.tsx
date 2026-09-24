@@ -1,6 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const machines = [
   {
@@ -42,87 +54,196 @@ const machines = [
 ];
 
 export function MachineShowcase() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [activeIndex, setActiveIndex] =
+    useState(0);
+
+  const activeMachine = machines[activeIndex];
+
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      const chapters =
+        gsap.utils.toArray<HTMLElement>(
+          ".machine-scroll-chapter",
+        );
+
+      chapters.forEach((chapter, index) => {
+        ScrollTrigger.create({
+          trigger: chapter,
+          start: "top 58%",
+          end: "bottom 42%",
+          onEnter: () => setActiveIndex(index),
+          onEnterBack: () =>
+            setActiveIndex(index),
+        });
+
+        const content =
+          chapter.querySelector(
+            ".machine-scroll-copy",
+          );
+
+        if (content) {
+          gsap.fromTo(
+            content,
+            {
+              opacity: 0.28,
+              y: 48,
+            },
+            {
+              opacity: 1,
+              y: 0,
+              ease: "none",
+              scrollTrigger: {
+                trigger: chapter,
+                start: "top 82%",
+                end: "top 48%",
+                scrub: 0.7,
+              },
+            },
+          );
+        }
+      });
+    }, section);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
   return (
-    <section className="bg-[#f2f0ea] text-[#171817]">
-      <div className="mx-auto w-full max-w-[1600px] px-[5vw] pb-10 pt-[110px] max-[650px]:px-[18px] max-[650px]:pt-20">
-        <div className="grid gap-8 pb-14 lg:grid-cols-[1.25fr_.75fr] lg:items-end">
+    <section
+      ref={sectionRef}
+      className="bg-[#f2f0ea] text-[#171817]"
+    >
+      <div className="mx-auto w-full max-w-[1600px] px-[5vw] pb-14 pt-[110px] max-[650px]:px-[18px] max-[650px]:pt-20">
+        <div className="grid gap-8 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
           <div>
             <span className="mb-5 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
               02 / Machine Range
             </span>
 
-            <h2 className="m-0 max-w-[980px] text-[clamp(52px,6.8vw,112px)] font-medium leading-[0.88] tracking-[-0.07em]">
-              Four machine lines.
-              <span className="block text-[#96958e]">
-                One production partner.
+            <h2 className="m-0 max-w-[1000px] text-[clamp(52px,6.8vw,112px)] font-medium leading-[0.88] tracking-[-0.07em]">
+              Machines for
+              <span className="block text-[#9a9992]">
+                continuous production.
               </span>
             </h2>
           </div>
 
-          <p className="m-0 max-w-[390px] text-[12px] leading-[1.8] text-[#666861] lg:justify-self-end">
-            Move straight to the machine line you need. Each range leads to
-            models, technical data, installation proof and a quote path.
+          <p className="m-0 max-w-[380px] text-[12px] leading-[1.8] text-[#686a63] lg:justify-self-end">
+            Scroll through SDP&apos;s four primary machine lines. Each image
+            changes as the corresponding production system comes into focus.
           </p>
         </div>
       </div>
 
       <div className="border-t border-[#c9c8c1]">
-        {machines.map((machine) => (
-          <article
-            key={machine.number}
-            className="border-b border-[#c9c8c1]"
-          >
-            <Link
-              href={machine.href}
-              className="group mx-auto grid min-h-[72vh] w-full max-w-[1600px] grid-cols-[minmax(320px,.7fr)_minmax(0,1.3fr)] items-stretch max-[900px]:grid-cols-1"
-            >
-              <div className="flex flex-col justify-between px-[5vw] py-12 max-[650px]:px-[18px] max-[650px]:py-9">
-                <div className="flex items-center justify-between border-b border-[#c9c8c1] pb-4">
-                  <span className="text-[10px] font-semibold tabular-nums text-[#77776f]">
-                    {machine.number}
+        <div className="mx-auto grid w-full max-w-[1600px] lg:grid-cols-[1.15fr_.85fr]">
+          <div className="hidden border-r border-[#c9c8c1] lg:block">
+            <div className="sticky top-[86px] h-[calc(100vh-86px)] min-h-[620px] overflow-hidden bg-[#171817]">
+              <div
+                key={activeMachine.image}
+                className="absolute inset-0 animate-[machineStageEnter_650ms_cubic-bezier(0.16,1,0.3,1)_both]"
+              >
+                <Image
+                  src={activeMachine.image}
+                  alt={activeMachine.title}
+                  fill
+                  sizes="58vw"
+                  className="object-cover"
+                  priority={activeIndex === 0}
+                />
+              </div>
+
+              <div className="absolute inset-0 bg-black/18" />
+
+              <div className="absolute left-7 top-7 z-10 flex items-center gap-3 text-[8px] font-bold uppercase tracking-[0.14em] text-white/55">
+                <span className="h-2 w-2 bg-[var(--site-accent)]" />
+                Machine system
+              </div>
+
+              <div className="absolute bottom-7 left-7 right-7 z-10 flex items-end justify-between border-t border-white/25 pt-4 text-white">
+                <div>
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-white/55">
+                    {activeMachine.eyebrow}
                   </span>
 
-                  <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-[#77776f]">
-                    {machine.eyebrow}
-                  </span>
+                  <strong className="mt-2 block text-[clamp(30px,3.5vw,54px)] font-medium tracking-[-0.05em]">
+                    {activeMachine.title}
+                  </strong>
                 </div>
 
-                <div className="py-12">
-                  <h3 className="m-0 text-[clamp(48px,5vw,86px)] font-medium leading-[0.9] tracking-[-0.065em]">
+                <span className="text-[14px] tabular-nums text-[var(--site-accent)]">
+                  {activeMachine.number}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            {machines.map((machine, index) => (
+              <article
+                key={machine.number}
+                className="machine-scroll-chapter flex min-h-[82vh] items-center border-b border-[#c9c8c1] px-[5vw] py-16 last:border-b-0 max-[650px]:min-h-0 max-[650px]:px-[18px] max-[650px]:py-14"
+              >
+                <div className="machine-scroll-copy w-full">
+                  <div className="relative mb-8 aspect-[4/3] overflow-hidden bg-[#171817] lg:hidden">
+                    <Image
+                      src={machine.image}
+                      alt={machine.title}
+                      fill
+                      sizes="100vw"
+                      className="object-cover"
+                    />
+
+                    <span className="absolute bottom-4 right-4 text-[11px] font-semibold tabular-nums text-[var(--site-accent)]">
+                      {machine.number}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between border-b border-[#c9c8c1] pb-4">
+                    <span className="text-[10px] font-semibold tabular-nums text-[var(--site-accent)]">
+                      {machine.number}
+                    </span>
+
+                    <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-[#77776f]">
+                      {machine.eyebrow}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-10 text-[clamp(48px,5.3vw,88px)] font-medium leading-[0.9] tracking-[-0.065em]">
                     {machine.title}
                   </h3>
 
-                  <p className="mt-7 max-w-[430px] text-[12px] leading-[1.75] text-[#696b65]">
+                  <p className="mt-7 max-w-[430px] text-[12px] leading-[1.8] text-[#696b65]">
                     {machine.description}
                   </p>
-                </div>
 
-                <div className="flex items-center justify-between border-t border-[#c9c8c1] pt-4">
-                  <span className="text-[10px] font-semibold">
+                  <Link
+                    href={machine.href}
+                    className="group mt-9 inline-flex items-center gap-4 text-[10px] font-semibold"
+                  >
                     Explore machine
+                    <ArrowUpRight
+                      size={17}
+                      className="text-[var(--site-accent)] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
+                    />
+                  </Link>
+
+                  <div className="mt-12 h-px w-16 bg-[var(--site-accent)]" />
+
+                  <span className="mt-4 block text-[8px] uppercase tracking-[0.13em] text-[#999890]">
+                    0{index + 1} / 04
                   </span>
-
-                  <ArrowUpRight
-                    size={20}
-                    className="text-[var(--site-accent)] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                  />
                 </div>
-              </div>
-
-              <div className="relative min-h-[520px] overflow-hidden bg-[#d9d8d1] max-[650px]:min-h-[360px]">
-                <Image
-                  src={machine.image}
-                  alt={machine.title}
-                  fill
-                  sizes="(max-width: 900px) 100vw, 65vw"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
-                />
-
-                <div className="pointer-events-none absolute inset-0 border-l border-black/10 max-[900px]:border-l-0 max-[900px]:border-t" />
-              </div>
-            </Link>
-          </article>
-        ))}
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
