@@ -50,7 +50,7 @@ export function SiteFooter() {
 
             <Link
               href="/contact"
-              className="group mt-7 inline-flex h-[50px] items-center gap-8 bg-[var(--site-accent)] px-5 text-[11px] font-bold text-[#0a0b0a] transition duration-200 hover:-translate-y-0.5 hover:bg-[#ffd867]"
+              className="group mt-7 inline-flex h-[50px] items-center gap-8 bg-[var(--site-accent)] px-5 text-[11px] font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#dc5d19]"
             >
               Request a Quote
               <ArrowUpRight
