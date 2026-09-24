@@ -146,19 +146,26 @@ export function MachineShowcase() {
         <div className="mx-auto grid w-full max-w-[1600px] lg:grid-cols-[1.15fr_.85fr]">
           <div className="hidden border-r border-[#c9c8c1] lg:block">
             <div className="sticky top-[86px] h-[calc(100vh-86px)] min-h-[620px] overflow-hidden bg-[#171817]">
-              <div
-                key={activeMachine.image}
-                className="absolute inset-0 animate-[machineStageEnter_650ms_cubic-bezier(0.16,1,0.3,1)_both]"
-              >
-                <Image
-                  src={activeMachine.image}
-                  alt={activeMachine.title}
-                  fill
-                  sizes="58vw"
-                  className="object-cover"
-                  priority={activeIndex === 0}
-                />
-              </div>
+              {machines.map((machine, index) => (
+                <div
+                  key={machine.image}
+                  className={`absolute inset-0 will-change-transform transition-transform duration-[900ms] ease-[cubic-bezier(0.76,0,0.24,1)] ${
+                    index <= activeIndex
+                      ? "translate-y-0"
+                      : "translate-y-full"
+                  }`}
+                  style={{ zIndex: index + 1 }}
+                >
+                  <Image
+                    src={machine.image}
+                    alt={machine.title}
+                    fill
+                    sizes="58vw"
+                    className="object-cover"
+                    priority={index === 0}
+                  />
+                </div>
+              ))}
 
               <div className="absolute inset-0 bg-black/18" />
 
