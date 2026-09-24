@@ -192,7 +192,7 @@ export function MachineShowcase() {
 
       <div className="relative z-[1] border-t border-[#c9c8c1]">
         <div className="mx-auto grid w-full max-w-[1600px] lg:grid-cols-[1.15fr_.85fr]">
-          <div className="hidden self-start border-r border-[#c9c8c1] lg:block">
+          <div className="relative hidden h-full border-r border-[#c9c8c1] lg:block">
             <div className="sticky top-0 h-svh overflow-hidden bg-[#171817]">
               {machines.map((machine, index) => (
                 <div
