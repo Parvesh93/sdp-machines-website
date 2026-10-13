@@ -5,6 +5,7 @@ import { InstallationsPreview } from "@/components/website/home/installations-pr
 import { MachineShowcase } from "@/components/website/home/machine-showcase";
 import { ServiceNetwork } from "@/components/website/home/service-network";
 
+// Homepage follows the approved SDP content sitemap.
 export default function HomePage() {
   return (
     <>
