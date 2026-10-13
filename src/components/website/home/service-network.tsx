@@ -32,17 +32,17 @@ export function ServiceNetwork() {
         gsap.fromTo(
           ".service-parallax-bg",
           {
-            yPercent: -7,
+            yPercent: -6,
             scale: 1.12,
           },
           {
-            yPercent: 7,
-            scale: 1.03,
+            yPercent: 8,
+            scale: 1.04,
             ease: "none",
             scrollTrigger: {
               trigger: section,
               start: "top top",
-              end: "bottom bottom",
+              end: "+=100%",
               scrub: 1,
               invalidateOnRefresh: true,
             },
@@ -50,39 +50,20 @@ export function ServiceNetwork() {
         );
 
         gsap.fromTo(
-          ".service-scroll-copy",
-          {
-            y: 18,
-            opacity: 0.72,
-          },
-          {
-            y: -18,
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: section,
-              start: "top top",
-              end: "bottom bottom",
-              scrub: 1,
-            },
-          },
-        );
-
-        gsap.fromTo(
           ".service-preview-card",
           {
-            y: 54,
-            opacity: 0.35,
+            y: 42,
+            opacity: 0.4,
           },
           {
             y: 0,
             opacity: 1,
-            stagger: 0.12,
+            stagger: 0.1,
             ease: "none",
             scrollTrigger: {
               trigger: section,
-              start: "top 35%",
-              end: "bottom 70%",
+              start: "top top",
+              end: "+=55%",
               scrub: 1,
             },
           },
@@ -131,9 +112,9 @@ export function ServiceNetwork() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate bg-[#07131a] text-[#f4f8fa] lg:h-[175svh]"
+      className="relative isolate z-0 overflow-hidden bg-[#07131a] text-[#f4f8fa] lg:sticky lg:top-0 lg:h-svh"
     >
-      <div className="relative overflow-hidden px-[5vw] py-[100px] max-[650px]:px-[18px] max-[650px]:py-20 lg:sticky lg:top-0 lg:flex lg:h-svh lg:items-center lg:py-0">
+      <div className="relative px-[5vw] py-[100px] max-[650px]:px-[18px] max-[650px]:py-20 lg:flex lg:h-svh lg:items-center lg:py-0">
         <div
           className="service-parallax-bg absolute -inset-[10%] -z-30 bg-cover bg-center will-change-transform"
           style={{ backgroundImage: `url("${serviceBackground}")` }}
@@ -155,7 +136,7 @@ export function ServiceNetwork() {
           aria-hidden="true"
         />
 
-        <div className="service-scroll-copy relative mx-auto w-full max-w-[1600px]">
+        <div className="relative mx-auto w-full max-w-[1600px]">
           <div className="service-preview-copy grid gap-10 lg:grid-cols-[1.24fr_.76fr] lg:items-end">
             <div>
               <span className="mb-5 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
@@ -214,7 +195,7 @@ export function ServiceNetwork() {
 
           <div className="mt-5 hidden items-center gap-3 text-[8px] font-semibold uppercase tracking-[0.13em] text-[#aac0cc]/55 lg:flex">
             <span className="h-px w-10 bg-[var(--site-accent)]" />
-            Scroll to move through service support
+            Continue scrolling
           </div>
         </div>
       </div>
