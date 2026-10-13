@@ -50,17 +50,17 @@ export function HomeFinalCta() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#0b1720] px-[5vw] py-[120px] text-[#f4f8fa] max-[650px]:px-[18px] max-[650px]:py-20"
+      className="relative overflow-hidden border-t border-[#8fb4c8]/14 bg-[#0b1720] px-[5vw] py-20 text-[#f4f8fa] lg:py-24 max-[650px]:px-[18px] max-[650px]:py-16"
     >
       <div className="home-cta-grid pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:72px_72px]" />
 
       <div className="home-cta-copy relative mx-auto w-full max-w-[1600px]">
-        <span className="mb-7 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
+        <span className="mb-5 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
           06 / Start a Conversation
         </span>
 
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-end">
-          <h2 className="max-w-[980px] text-[clamp(52px,6.2vw,106px)] font-medium leading-[0.9] tracking-[-0.067em]">
+        <div className="grid gap-8 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
+          <h2 className="max-w-[900px] text-[clamp(42px,5.2vw,78px)] font-medium leading-[0.92] tracking-[-0.06em]">
             Planning a new line or
             <span className="block text-[#8fa6b4]">
               upgrading an existing one?
@@ -68,15 +68,15 @@ export function HomeFinalCta() {
           </h2>
 
           <div className="lg:justify-self-end">
-            <p className="max-w-[440px] text-[12px] leading-7 text-[#a9beca]/70">
+            <p className="max-w-[400px] text-[11px] leading-6 text-[#a9beca]/70">
               Tell us which machine you are considering and our team will help
               you take the next step.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href="/contact"
-                className="group inline-flex h-[50px] items-center gap-7 bg-[var(--site-accent)] px-5 text-[10px] font-bold uppercase tracking-[0.06em] text-white transition duration-300 hover:-translate-y-1 hover:bg-[#147aa5]"
+                className="group inline-flex h-[46px] items-center gap-6 bg-[var(--site-accent)] px-5 text-[9px] font-bold uppercase tracking-[0.06em] text-white transition duration-300 hover:-translate-y-1 hover:bg-[#147aa5]"
               >
                 Request a Quote
                 <ArrowUpRight
@@ -87,7 +87,7 @@ export function HomeFinalCta() {
 
               <Link
                 href="/contact"
-                className="group inline-flex h-[50px] items-center gap-4 border border-[#8fb4c8]/30 px-5 text-[10px] font-bold uppercase tracking-[0.06em] text-white transition duration-300 hover:-translate-y-1 hover:border-[var(--site-accent)] hover:bg-white/[0.03]"
+                className="group inline-flex h-[46px] items-center gap-4 border border-[#8fb4c8]/30 px-5 text-[9px] font-bold uppercase tracking-[0.06em] text-white transition duration-300 hover:-translate-y-1 hover:border-[var(--site-accent)] hover:bg-white/[0.03]"
               >
                 <MessageCircle
                   size={16}
