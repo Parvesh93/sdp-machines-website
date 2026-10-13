@@ -47,6 +47,21 @@ export function InstallationsPreview() {
           },
         },
       );
+
+      gsap.fromTo(
+        ".installation-detail-panel",
+        { opacity: 0, x: 32 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.75,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".installation-proof",
+            start: "top 74%",
+          },
+        },
+      );
     }, section);
 
     return () => ctx.revert();
@@ -66,9 +81,7 @@ export function InstallationsPreview() {
 
             <h2 className="m-0 max-w-[980px] text-[clamp(54px,6.5vw,110px)] font-medium leading-[0.88] tracking-[-0.068em] max-[650px]:text-[clamp(48px,14vw,72px)]">
               Our machines
-              <span className="block text-[#8fa6b4]">
-                at work.
-              </span>
+              <span className="block text-[#8fa6b4]">at work.</span>
             </h2>
           </div>
 
@@ -91,17 +104,17 @@ export function InstallationsPreview() {
           </div>
         </div>
 
-        <div className="grid gap-px bg-[#ccd7de] lg:grid-cols-[1.45fr_.55fr]">
-          <div className="relative min-h-[650px] overflow-hidden bg-[#0b1720] max-[950px]:min-h-[520px] max-[650px]:min-h-[420px]">
+        <div className="installation-proof grid gap-px bg-[#ccd7de] lg:grid-cols-[1.45fr_.55fr]">
+          <div className="group relative min-h-[650px] overflow-hidden bg-[#0b1720] max-[950px]:min-h-[520px] max-[650px]:min-h-[420px]">
             <Image
               src="/images/installations/installation-01.jpeg"
               alt="SDP machine installed at a stone processing facility"
               fill
               sizes="(max-width: 900px) 100vw, 70vw"
-              className="installation-image object-cover [filter:saturate(0.82)_contrast(1.04)]"
+              className="installation-image object-cover [filter:saturate(0.82)_contrast(1.04)] transition-transform duration-700 ease-out group-hover:scale-[1.025]"
             />
 
-            <div className="absolute inset-0 bg-black/28" />
+            <div className="absolute inset-0 bg-black/28 transition-colors duration-500 group-hover:bg-black/20" />
 
             <div className="absolute bottom-7 left-[30px] z-[2] max-[650px]:bottom-[18px] max-[650px]:left-[18px]">
               <span className="mb-[7px] block text-[8px] uppercase tracking-[0.13em] text-white/55">
@@ -114,7 +127,7 @@ export function InstallationsPreview() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-between bg-[#0b1720] p-8 text-[#f4f8fa]">
+          <div className="installation-detail-panel flex flex-col justify-between bg-[#0b1720] p-8 text-[#f4f8fa]">
             <div>
               <span className="text-[8px] uppercase tracking-[0.14em] text-[#8fa6b4]/55">
                 Project Details
