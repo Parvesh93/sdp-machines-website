@@ -169,11 +169,11 @@ export function ServiceNetwork() {
             </div>
           </div>
 
-          <div className="mt-12 grid border-y border-[#b9ced9]/24 bg-[#07131a]/28 backdrop-blur-[3px] md:grid-cols-3">
+          <div className="mt-10 grid grid-cols-2 border-y border-[#b9ced9]/24 bg-[#07131a]/28 backdrop-blur-[3px] md:mt-12 md:grid-cols-3">
             {supportItems.map(({ icon: Icon, label }, index) => (
               <div
                 key={label}
-                className="service-preview-card group relative flex min-h-[190px] flex-col justify-between overflow-hidden border-b border-[#b9ced9]/24 bg-[#07131a]/18 p-7 transition-[background-color,transform,backdrop-filter] duration-300 hover:-translate-y-1 hover:bg-[#0d1d27]/78 hover:backdrop-blur-md last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
+                className="service-preview-card group relative flex min-h-[145px] flex-col justify-between overflow-hidden border-b border-[#b9ced9]/24 bg-[#07131a]/18 p-5 transition-[background-color,transform,backdrop-filter] duration-300 odd:border-r odd:border-[#b9ced9]/24 hover:-translate-y-1 hover:bg-[#0d1d27]/78 hover:backdrop-blur-md last:col-span-2 last:border-r-0 last:border-b-0 md:min-h-[190px] md:col-span-1 md:border-b-0 md:border-r md:p-7 md:odd:border-r md:last:col-span-1 md:last:border-r-0"
               >
                 <div className="flex items-center justify-between">
                   <Icon
@@ -185,7 +185,7 @@ export function ServiceNetwork() {
                   </span>
                 </div>
 
-                <strong className="max-w-[280px] text-[clamp(22px,2.05vw,30px)] font-medium leading-[1.05] tracking-[-0.04em]">
+                <strong className="max-w-[280px] text-[clamp(18px,5vw,24px)] font-medium leading-[1.05] tracking-[-0.04em] md:text-[clamp(22px,2.05vw,30px)]">
                   {label}
                 </strong>
 
