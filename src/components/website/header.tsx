@@ -101,7 +101,7 @@ export function Header() {
       </header>
 
       <div
-        className={`fixed inset-0 z-[90] bg-[#07131a] transition-[opacity,visibility,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] min-[1080px]:hidden ${
+        className={`fixed inset-0 z-[90] overflow-y-auto bg-[#07131a] transition-[opacity,visibility,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] min-[1080px]:hidden ${
           menuOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible pointer-events-none -translate-y-4 opacity-0"
@@ -133,19 +133,21 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="mt-auto flex items-end justify-between gap-8 pt-8 max-[650px]:flex-col max-[650px]:items-stretch">
-            <p className="max-w-[280px] text-[11px] leading-[1.65] text-[#9fb6c4]/60">
-              Heavy-duty stone processing machinery engineered in Ajmer, India.
-            </p>
-
+          <div className="pt-6">
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className={`${quoteButtonClass} max-[650px]:w-full`}
+              className={`${quoteButtonClass} w-full min-[651px]:w-auto`}
             >
               Request a Quote
               <ArrowUpRight size={16} />
             </Link>
+          </div>
+
+          <div className="mt-auto pt-6">
+            <p className="max-w-[280px] text-[11px] leading-[1.65] text-[#9fb6c4]/60">
+              Heavy-duty stone processing machinery engineered in Ajmer, India.
+            </p>
           </div>
         </div>
       </div>
