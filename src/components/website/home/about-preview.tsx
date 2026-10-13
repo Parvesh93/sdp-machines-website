@@ -1,5 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { useEffect, useRef } from "react";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const capabilities = [
   "Cutting",
@@ -9,9 +17,54 @@ const capabilities = [
 ];
 
 export function AboutPreview() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".about-copy",
+        { opacity: 0, y: 34 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 78%",
+          },
+        },
+      );
+
+      gsap.fromTo(
+        ".about-capability",
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 0.55,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-capabilities",
+            start: "top 82%",
+          },
+        },
+      );
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="bg-[#f4f7fa] px-[5vw] py-[120px] text-[#0b1720] max-[650px]:px-[18px] max-[650px]:py-20">
-      <div className="mx-auto grid w-full max-w-[1600px] gap-14 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
+    <section
+      ref={sectionRef}
+      className="bg-[#f4f7fa] px-[5vw] py-[120px] text-[#0b1720] max-[650px]:px-[18px] max-[650px]:py-20"
+    >
+      <div className="about-copy mx-auto grid w-full max-w-[1600px] gap-14 lg:grid-cols-[1.15fr_.85fr] lg:items-end">
         <div>
           <span className="mb-6 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
             03 / About SDP Machines
@@ -43,18 +96,21 @@ export function AboutPreview() {
         </div>
       </div>
 
-      <div className="mx-auto mt-16 grid w-full max-w-[1600px] border-y border-[#ccd7de] sm:grid-cols-2 lg:grid-cols-4">
+      <div className="about-capabilities mx-auto mt-16 grid w-full max-w-[1600px] border-y border-[#ccd7de] sm:grid-cols-2 lg:grid-cols-4">
         {capabilities.map((item, index) => (
           <div
             key={item}
-            className="flex min-h-[150px] flex-col justify-between border-b border-[#ccd7de] p-6 last:border-b-0 sm:border-r sm:nth-[2n]:border-r-0 lg:border-b-0 lg:nth-[2n]:border-r lg:last:border-r-0"
+            className="about-capability group relative flex min-h-[150px] flex-col justify-between overflow-hidden border-b border-[#ccd7de] p-6 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-white last:border-b-0 sm:border-r sm:nth-[2n]:border-r-0 lg:border-b-0 lg:nth-[2n]:border-r lg:last:border-r-0"
           >
             <span className="text-[9px] tabular-nums text-[var(--site-accent)]">
               0{index + 1}
             </span>
-            <strong className="text-[20px] font-medium tracking-[-0.035em]">
+
+            <strong className="relative z-10 text-[20px] font-medium tracking-[-0.035em]">
               {item}
             </strong>
+
+            <div className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[var(--site-accent)] transition-transform duration-300 group-hover:scale-x-100" />
           </div>
         ))}
       </div>
