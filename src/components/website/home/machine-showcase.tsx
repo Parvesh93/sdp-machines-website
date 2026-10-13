@@ -165,7 +165,7 @@ export function MachineShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-30 -mt-[38svh] bg-[#f2f0ea] text-[#171817] shadow-[0_-42px_90px_rgba(0,0,0,0.34)] max-[700px]:-mt-[18svh]"
+      className="relative z-30 -mt-[38svh] bg-[#f4f7fa] text-[#0b1720] shadow-[0_-42px_90px_rgba(0,0,0,0.34)] max-[700px]:-mt-[18svh]"
     >
       <div className="pointer-events-none absolute -top-12 left-[8%] right-[8%] h-12 rounded-[50%] bg-black/25 blur-[30px]" />
       <div className="relative z-[1] mx-auto w-full max-w-[1600px] px-[5vw] py-[62px] max-[650px]:px-[18px] max-[650px]:py-12">
@@ -177,19 +177,19 @@ export function MachineShowcase() {
 
             <h2 className="m-0 max-w-[820px] text-[clamp(42px,4.9vw,76px)] font-medium leading-[0.94] tracking-[-0.055em]">
               Machines for
-              <span className="ml-[0.18em] text-[#9a9992] max-[700px]:ml-0 max-[700px]:block">
+              <span className="ml-[0.18em] text-[#8fa6b4] max-[700px]:ml-0 max-[700px]:block">
                 continuous production.
               </span>
             </h2>
           </div>
 
           <div className="lg:justify-self-end">
-            <p className="m-0 max-w-[340px] text-[11px] leading-[1.7] text-[#686a63]">
+            <p className="m-0 max-w-[340px] text-[11px] leading-[1.7] text-[#5f7480]">
               Four core machine lines engineered for cutting, finishing and
               material handling in continuous stone production.
             </p>
 
-            <div className="mt-5 flex items-center gap-3 text-[8px] font-semibold uppercase tracking-[0.13em] text-[#8f8f88]">
+            <div className="mt-5 flex items-center gap-3 text-[8px] font-semibold uppercase tracking-[0.13em] text-[#7f96a4]">
               <span className="h-[6px] w-[6px] bg-[var(--site-accent)]" />
               Scroll to explore
             </div>
@@ -197,10 +197,10 @@ export function MachineShowcase() {
         </div>
       </div>
 
-      <div className="relative z-[1] border-t border-[#c9c8c1]">
+      <div className="relative z-[1] border-t border-[#ccd7de]">
         <div className="mx-auto grid w-full max-w-[1600px] lg:grid-cols-[1.15fr_.85fr]">
-          <div className="relative hidden h-full border-r border-[#c9c8c1] lg:block">
-            <div className="sticky top-0 h-svh overflow-hidden bg-[#171817]">
+          <div className="relative hidden h-full border-r border-[#ccd7de] lg:block">
+            <div className="sticky top-0 h-svh overflow-hidden bg-[#0b1720]">
               {machines.map((machine, index) => (
                 <div
                   key={machine.image}
@@ -221,14 +221,14 @@ export function MachineShowcase() {
               ))}
 
               <div className="pointer-events-none absolute inset-0 z-20">
-                <div className="absolute left-7 top-[110px] flex items-center gap-3 text-[8px] font-bold uppercase tracking-[0.14em] text-white/55">
+                <div className="absolute left-7 top-[110px] flex items-center gap-3 text-[8px] font-bold uppercase tracking-[0.14em] text-[#d2e0e7]/65">
                   <span className="h-2 w-2 bg-[var(--site-accent)]" />
                   Machine system
                 </div>
 
-                <div className="absolute bottom-8 left-7 right-7 flex items-end justify-between border-t border-white/25 pt-4 text-white">
+                <div className="absolute bottom-8 left-7 right-7 flex items-end justify-between border-t border-[#b8cfdb]/30 pt-4 text-white">
                   <div>
-                    <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-white/55">
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-[#d2e0e7]/65">
                       {machines[activeIndex].eyebrow}
                     </span>
 
@@ -249,10 +249,10 @@ export function MachineShowcase() {
             {machines.map((machine, index) => (
               <article
                 key={machine.number}
-                className="machine-scroll-chapter flex min-h-[82vh] items-center border-b border-[#c9c8c1] px-[5vw] py-16 last:border-b-0 max-[650px]:min-h-0 max-[650px]:px-[18px] max-[650px]:py-14"
+                className="machine-scroll-chapter flex min-h-[82vh] items-center border-b border-[#ccd7de] px-[5vw] py-16 last:border-b-0 max-[650px]:min-h-0 max-[650px]:px-[18px] max-[650px]:py-14"
               >
                 <div className="machine-scroll-copy w-full">
-                  <div className="relative mb-8 aspect-[4/3] overflow-hidden bg-[#171817] lg:hidden">
+                  <div className="relative mb-8 aspect-[4/3] overflow-hidden bg-[#0b1720] lg:hidden">
                     <Image
                       src={machine.image}
                       alt={machine.title}
@@ -266,12 +266,12 @@ export function MachineShowcase() {
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between border-b border-[#c9c8c1] pb-4">
+                  <div className="flex items-center justify-between border-b border-[#ccd7de] pb-4">
                     <span className="text-[10px] font-semibold tabular-nums text-[var(--site-accent)]">
                       {machine.number}
                     </span>
 
-                    <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-[#77776f]">
+                    <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-[#6e8796]">
                       {machine.eyebrow}
                     </span>
                   </div>
@@ -280,7 +280,7 @@ export function MachineShowcase() {
                     {machine.title}
                   </h3>
 
-                  <p className="mt-7 max-w-[430px] text-[12px] leading-[1.8] text-[#696b65]">
+                  <p className="mt-7 max-w-[430px] text-[12px] leading-[1.8] text-[#5f7480]">
                     {machine.description}
                   </p>
 
@@ -297,7 +297,7 @@ export function MachineShowcase() {
 
                   <div className="mt-12 h-px w-16 bg-[var(--site-accent)]" />
 
-                  <span className="mt-4 block text-[8px] uppercase tracking-[0.13em] text-[#999890]">
+                  <span className="mt-4 block text-[8px] uppercase tracking-[0.13em] text-[#8fa6b4]">
                     0{index + 1} / 04
                   </span>
                 </div>
