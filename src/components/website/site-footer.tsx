@@ -81,7 +81,7 @@ export function SiteFooter() {
 
         <div className="flex flex-col gap-3 pt-7 text-[8px] uppercase tracking-[0.12em] text-[#8fa6b4]/45 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} SDP Machines</span>
-          <span>Precision engineering / Since 1995</span>
+          <span>Stone processing machinery / Ajmer, India</span>
         </div>
       </div>
     </footer>
