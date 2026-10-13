@@ -3,45 +3,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import {
-  useEffect,
-  useRef,
-} from "react";
+import { useEffect, useRef } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const locations = [
-  "Kishangarh",
-  "Hosur",
-  "Krishnagiri",
-  "Ongole",
-  "Karimnagar",
-];
-
-const stats = [
-  { value: "1,000+", label: "Installations" },
-  { value: "5", label: "Service Centres" },
-  { value: "1995", label: "Engineering Since" },
-];
-
 export function InstallationsPreview() {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-
     if (!section) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".installation-heading",
-        {
-          opacity: 0,
-          y: 45,
-        },
+        { opacity: 0, y: 45 },
         {
           opacity: 1,
           y: 0,
@@ -56,9 +35,7 @@ export function InstallationsPreview() {
 
       gsap.fromTo(
         ".installation-image",
-        {
-          scale: 1.08,
-        },
+        { scale: 1.08 },
         {
           scale: 1,
           ease: "none",
@@ -70,30 +47,9 @@ export function InstallationsPreview() {
           },
         },
       );
-
-      gsap.fromTo(
-        ".installation-stat",
-        {
-          opacity: 0,
-          y: 25,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.1,
-          duration: 0.65,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".installation-proof-grid",
-            start: "top 75%",
-          },
-        },
-      );
     }, section);
 
-    return () => {
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -105,28 +61,28 @@ export function InstallationsPreview() {
         <div className="installation-heading mb-[70px] grid grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] items-end gap-20 max-[950px]:grid-cols-1 max-[950px]:gap-7">
           <div>
             <span className="mb-[25px] block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
-              04 / Field Proof
+              05 / Installations
             </span>
 
             <h2 className="m-0 max-w-[980px] text-[clamp(54px,6.5vw,110px)] font-medium leading-[0.88] tracking-[-0.068em] max-[650px]:text-[clamp(48px,14vw,72px)]">
-              Built in Ajmer.
+              Our machines
               <span className="block text-[#8fa6b4]">
-                Running where stone is processed.
+                at work.
               </span>
             </h2>
           </div>
 
           <div className="pb-2.5">
-            <p className="mb-6 max-w-[380px] text-[12px] leading-[1.75] text-[#5f7480]">
-              Machines prove themselves on the factory floor. SDP installations
-              operate across India&apos;s major stone-processing clusters.
+            <p className="mb-6 max-w-[400px] text-[12px] leading-[1.75] text-[#5f7480]">
+              See selected SDP machines installed in stone processing facilities.
+              Explore machines, locations and project details as they are approved for publication.
             </p>
 
             <Link
               href="/installations"
               className="group inline-flex items-center gap-[15px] text-[10px] font-semibold text-[#0b1720]"
             >
-              View installations
+              View Installations
               <ArrowUpRight
                 size={17}
                 className="text-[var(--site-accent)] transition-transform duration-200 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]"
@@ -135,13 +91,13 @@ export function InstallationsPreview() {
           </div>
         </div>
 
-        <div className="installation-proof-grid grid grid-cols-[minmax(0,1.5fr)_minmax(300px,0.5fr)] gap-px bg-[#ccd7de] max-[950px]:grid-cols-1">
+        <div className="grid gap-px bg-[#ccd7de] lg:grid-cols-[1.45fr_.55fr]">
           <div className="relative min-h-[650px] overflow-hidden bg-[#0b1720] max-[950px]:min-h-[520px] max-[650px]:min-h-[420px]">
             <Image
               src="/images/installations/installation-01.jpeg"
               alt="SDP machine installed at a stone processing facility"
               fill
-              sizes="(max-width: 900px) 100vw, 65vw"
+              sizes="(max-width: 900px) 100vw, 70vw"
               className="installation-image object-cover [filter:saturate(0.82)_contrast(1.04)]"
             />
 
@@ -149,55 +105,37 @@ export function InstallationsPreview() {
 
             <div className="absolute bottom-7 left-[30px] z-[2] max-[650px]:bottom-[18px] max-[650px]:left-[18px]">
               <span className="mb-[7px] block text-[8px] uppercase tracking-[0.13em] text-white/55">
-                Installation / India
+                Installation Preview
               </span>
 
-              <strong className="block text-[clamp(25px,3vw,42px)] font-medium tracking-[-0.04em] text-white">
-                Machines in production
+              <strong className="block max-w-[620px] text-[clamp(28px,3.2vw,46px)] font-medium tracking-[-0.04em] text-white">
+                Stone processing equipment in working environments.
               </strong>
             </div>
           </div>
 
-          <div className="flex flex-col bg-[#0b1720] text-[#f3f1eb] max-[950px]:grid max-[950px]:grid-cols-2 max-[650px]:block">
-            <div className="grid">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="installation-stat flex min-h-[150px] flex-col justify-between border-b border-white/10 px-[27px] py-6 max-[650px]:min-h-[110px]"
-                >
-                  <strong className="text-[clamp(40px,4vw,66px)] font-medium leading-none tracking-[-0.06em] tabular-nums">
-                    {stat.value}
-                  </strong>
-
-                  <span className="text-[9px] uppercase tracking-[0.09em] text-[#8fa6b4]">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-auto p-7">
-              <span className="mb-[18px] block text-[8px] uppercase tracking-[0.14em] text-[#78909f]">
-                Stone processing clusters
+          <div className="flex flex-col justify-between bg-[#0b1720] p-8 text-[#f4f8fa]">
+            <div>
+              <span className="text-[8px] uppercase tracking-[0.14em] text-[#8fa6b4]/55">
+                Project Details
               </span>
 
-              <div className="border-t border-white/10">
-                {locations.map((location, index) => (
-                  <div
-                    key={location}
-                    className="grid min-h-[52px] grid-cols-[36px_1fr] items-center border-b border-white/10"
-                  >
-                    <span className="text-[8px] text-[#6f8795]">
-                      0{index + 1}
-                    </span>
-
-                    <strong className="text-[12px] font-medium text-[#c5d5de]">
-                      {location}
-                    </strong>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-6 max-w-[320px] text-[12px] leading-7 text-[#a9beca]/70">
+                Machine model, location, installation year and approved photographs
+                will be shown as each project is cleared for publication.
+              </p>
             </div>
+
+            <Link
+              href="/installations"
+              className="group mt-12 inline-flex items-center justify-between border-t border-[#8fb4c8]/20 pt-6 text-[10px] font-semibold"
+            >
+              Explore Installations
+              <ArrowUpRight
+                size={18}
+                className="text-[var(--site-accent)] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
+            </Link>
           </div>
         </div>
       </div>
