@@ -74,7 +74,7 @@ const sectionIndexClass =
   "mb-6 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]";
 
 const quoteButtonClass =
-  "inline-flex h-[50px] items-center justify-center gap-6 bg-[var(--site-accent)] px-5 text-[11px] font-bold text-[#0a0b0a] transition duration-200 hover:-translate-y-0.5 hover:bg-[#ffd867]";
+  "inline-flex h-[50px] items-center justify-center gap-6 bg-[var(--site-accent)] px-5 text-[11px] font-bold text-[#0a0b0a] transition duration-200 hover:-translate-y-0.5 hover:bg-[#147aa5]";
 
 export function MachineDetailExperience({
   machine,
@@ -170,7 +170,7 @@ export function MachineDetailExperience({
   return (
     <div
       ref={wrapperRef}
-      className="bg-[#0b0c0c] text-[#f2f0ea]"
+      className="bg-[#07131a] text-[#f4f8fa]"
     >
       <section className="machine-detail-hero relative grid min-h-svh grid-cols-[minmax(0,0.9fr)_minmax(520px,1.1fr)] items-center overflow-hidden px-[5vw] pb-[70px] pt-[150px] max-[1050px]:grid-cols-1 max-[1050px]:pt-[135px] max-[700px]:px-[18px] max-[700px]:pb-[75px] max-[700px]:pt-[120px]">
         <div className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:80px_80px]" />
@@ -184,7 +184,7 @@ export function MachineDetailExperience({
             {machine.name}
           </h1>
 
-          <p className="my-[35px] mb-[25px] max-w-[490px] text-[12px] leading-[1.75] text-[#8c8f8a]">
+          <p className="my-[35px] mb-[25px] max-w-[490px] text-[12px] leading-[1.75] text-[#8fa6b4]">
             {machine.summary ??
               "Engineered for continuous stone processing, precision and long production life."}
           </p>
@@ -212,7 +212,7 @@ export function MachineDetailExperience({
         </div>
 
         <div className="relative z-[2] h-[min(70vh,720px)] max-[1050px]:mt-[-30px] max-[1050px]:h-[520px] max-[700px]:h-[360px]">
-          <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(216,255,62,0.12)] max-[700px]:h-[330px] max-[700px]:w-[330px]" />
+          <div className="absolute left-1/2 top-1/2 h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(31,143,193,0.18)] max-[700px]:h-[330px] max-[700px]:w-[330px]" />
 
           <Image
             src="/images/machines/multi-cutter-3.png"
@@ -238,7 +238,7 @@ export function MachineDetailExperience({
         </div>
       </section>
 
-      <section className="machine-story relative grid min-h-[240vh] grid-cols-[minmax(320px,0.7fr)_minmax(520px,1.3fr)_minmax(260px,0.5fr)] border-t border-white/[0.08] bg-[#111210] max-[1050px]:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.2fr)] max-[700px]:block max-[700px]:min-h-0">
+      <section className="machine-story relative grid min-h-[240vh] grid-cols-[minmax(320px,0.7fr)_minmax(520px,1.3fr)_minmax(260px,0.5fr)] border-t border-white/[0.08] bg-[#0b1720] max-[1050px]:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.2fr)] max-[700px]:block max-[700px]:min-h-0">
         <div className="relative border-r border-white/[0.09] max-[700px]:border-r-0">
           <div className="sticky top-[130px] flex min-h-[560px] flex-col justify-center px-[42px] py-[60px] max-[700px]:relative max-[700px]:top-auto max-[700px]:min-h-0 max-[700px]:px-[18px] max-[700px]:pb-[35px] max-[700px]:pt-[70px]">
             <span className={sectionIndexClass}>
@@ -253,7 +253,7 @@ export function MachineDetailExperience({
               {active.title}
             </h2>
 
-            <p className="mt-6 max-w-[340px] text-[11px] leading-[1.7] text-[#838681]">
+            <p className="mt-6 max-w-[340px] text-[11px] leading-[1.7] text-[#8fa6b4]">
               {active.description}
             </p>
 
@@ -263,7 +263,7 @@ export function MachineDetailExperience({
                   {active.statValue}
                 </strong>
 
-                <span className="mt-[5px] block text-[8px] uppercase tracking-[0.1em] text-[#666964]">
+                <span className="mt-[5px] block text-[8px] uppercase tracking-[0.1em] text-[#718a99]">
                   {active.statLabel}
                 </span>
               </div>
@@ -286,9 +286,9 @@ export function MachineDetailExperience({
               className="object-contain drop-shadow-[0_30px_32px_rgba(0,0,0,0.65)]"
             />
 
-            <span className="absolute left-[30%] top-[31%] h-[11px] w-[11px] rounded-full border border-[rgba(216,255,62,0.65)] shadow-[0_0_0_7px_rgba(216,255,62,0.05)]" />
-            <span className="absolute right-[21%] top-[47%] h-[11px] w-[11px] rounded-full border border-[rgba(216,255,62,0.65)] shadow-[0_0_0_7px_rgba(216,255,62,0.05)]" />
-            <span className="absolute bottom-[24%] left-1/2 h-[11px] w-[11px] rounded-full border border-[rgba(216,255,62,0.65)] shadow-[0_0_0_7px_rgba(216,255,62,0.05)]" />
+            <span className="absolute left-[30%] top-[31%] h-[11px] w-[11px] rounded-full border border-[rgba(31,143,193,0.72)] shadow-[0_0_0_7px_rgba(31,143,193,0.08)]" />
+            <span className="absolute right-[21%] top-[47%] h-[11px] w-[11px] rounded-full border border-[rgba(31,143,193,0.72)] shadow-[0_0_0_7px_rgba(31,143,193,0.08)]" />
+            <span className="absolute bottom-[24%] left-1/2 h-[11px] w-[11px] rounded-full border border-[rgba(31,143,193,0.72)] shadow-[0_0_0_7px_rgba(31,143,193,0.08)]" />
           </div>
 
           <div className="absolute bottom-[26px] left-7 z-[4] flex items-center gap-3 border border-white/10 bg-[rgba(14,15,14,0.76)] px-[14px] py-3 backdrop-blur-[10px]">
@@ -316,7 +316,7 @@ export function MachineDetailExperience({
                 {chapter.title}
               </strong>
 
-              <p className="mt-3 text-[10px] leading-[1.6] text-[#737671]">
+              <p className="mt-3 text-[10px] leading-[1.6] text-[#78909f]">
                 {chapter.description}
               </p>
             </article>
@@ -324,7 +324,7 @@ export function MachineDetailExperience({
         </div>
       </section>
 
-      <section className="bg-[#e9e8e2] px-[5vw] py-[130px] text-[#171817] max-[700px]:px-[18px] max-[700px]:py-20">
+      <section className="bg-[#f4f7fa] px-[5vw] py-[130px] text-[#0b1720] max-[700px]:px-[18px] max-[700px]:py-20">
         <div className="mx-auto w-full max-w-[1600px]">
           <span className="mb-6 block text-[9px] font-bold uppercase tracking-[0.17em] text-[#64675f]">
             Models
@@ -332,7 +332,7 @@ export function MachineDetailExperience({
 
           <h2 className="m-0 max-w-[950px] text-[clamp(52px,6vw,100px)] font-medium leading-[0.9] tracking-[-0.065em]">
             One platform.
-            <span className="block text-[#9b9b93]">
+            <span className="block text-[#8fa6b4]">
               Multiple production requirements.
             </span>
           </h2>
@@ -359,14 +359,14 @@ export function MachineDetailExperience({
               ))}
             </div>
           ) : (
-            <div className="mt-[65px] border border-black/10 px-5 py-[60px] text-center text-[#747772]">
+            <div className="mt-[65px] border border-black/10 px-5 py-[60px] text-center text-[#718a99]">
               Models will be added shortly.
             </div>
           )}
         </div>
       </section>
 
-      <section className="border-t border-white/[0.08] bg-[#111210] px-[5vw] pb-[140px] pt-[130px] text-[#f2f0ea] max-[900px]:px-6 max-[900px]:py-[100px] max-[650px]:px-[18px] max-[650px]:py-20">
+      <section className="border-t border-white/[0.08] bg-[#0b1720] px-[5vw] pb-[140px] pt-[130px] text-[#f4f8fa] max-[900px]:px-6 max-[900px]:py-[100px] max-[650px]:px-[18px] max-[650px]:py-20">
         <div className="mx-auto w-full max-w-[1600px]">
           {machine.models.length === 1 ? (
             <>
@@ -378,7 +378,7 @@ export function MachineDetailExperience({
 
                   <h2 className="m-0 max-w-[850px] text-[clamp(52px,6vw,100px)] font-medium leading-[0.9] tracking-[-0.065em] max-[650px]:text-[clamp(48px,14vw,72px)]">
                     Technical
-                    <span className="block text-[#737671]">
+                    <span className="block text-[#78909f]">
                       specifications.
                     </span>
                   </h2>
@@ -388,10 +388,10 @@ export function MachineDetailExperience({
                   <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-[#62655f]">
                     Model
                   </span>
-                  <strong className="mt-2 text-[30px] font-medium tracking-[-0.045em] text-[#f2f0ea]">
+                  <strong className="mt-2 text-[30px] font-medium tracking-[-0.045em] text-[#f4f8fa]">
                     {machine.models[0].modelNumber}
                   </strong>
-                  <p className="mt-[18px] text-[11px] leading-[1.7] text-[#858883]">
+                  <p className="mt-[18px] text-[11px] leading-[1.7] text-[#8fa6b4]">
                     Key technical parameters for evaluating this machine against
                     your production requirement.
                   </p>
@@ -429,19 +429,19 @@ export function MachineDetailExperience({
                           {specifications.map((specification) => (
                             <div
                               key={specification.id}
-                              className="grid min-h-[72px] grid-cols-[minmax(0,1fr)_auto] items-center gap-10 border-b border-white/[0.08] px-6 py-[18px] transition-colors duration-200 last:border-b-0 hover:bg-[rgba(216,255,62,0.025)] max-[700px]:gap-5"
+                              className="grid min-h-[72px] grid-cols-[minmax(0,1fr)_auto] items-center gap-10 border-b border-white/[0.08] px-6 py-[18px] transition-colors duration-200 last:border-b-0 hover:bg-[rgba(31,143,193,0.055)] max-[700px]:gap-5"
                             >
                               <span className="text-[12px] text-[#9a9d98]">
                                 {specification.label}
                               </span>
 
                               <div className="min-w-[130px] text-right">
-                                <strong className="text-[17px] font-medium tabular-nums text-[#f2f0ea]">
+                                <strong className="text-[17px] font-medium tabular-nums text-[#f4f8fa]">
                                   {specification.value}
                                 </strong>
 
                                 {specification.unit ? (
-                                  <span className="ml-1.5 text-[9px] text-[#666964]">
+                                  <span className="ml-1.5 text-[9px] text-[#718a99]">
                                     {specification.unit}
                                   </span>
                                 ) : null}
@@ -454,7 +454,7 @@ export function MachineDetailExperience({
                   })}
                 </div>
               ) : (
-                <div className="border border-white/10 px-5 py-[60px] text-center text-[#747772]">
+                <div className="border border-white/10 px-5 py-[60px] text-center text-[#718a99]">
                   Technical specifications will be added shortly.
                 </div>
               )}
@@ -469,13 +469,13 @@ export function MachineDetailExperience({
 
                   <h2 className="m-0 max-w-[850px] text-[clamp(52px,6vw,100px)] font-medium leading-[0.9] tracking-[-0.065em] max-[650px]:text-[clamp(48px,14vw,72px)]">
                     Compare
-                    <span className="block text-[#737671]">
+                    <span className="block text-[#78909f]">
                       machine models.
                     </span>
                   </h2>
                 </div>
 
-                <p className="m-0 max-w-[390px] text-[11px] leading-[1.75] text-[#858883]">
+                <p className="m-0 max-w-[390px] text-[11px] leading-[1.75] text-[#8fa6b4]">
                   Compare key technical parameters across available models to
                   identify the right configuration for your production
                   requirement.
@@ -487,7 +487,7 @@ export function MachineDetailExperience({
                   <table className="w-full min-w-[760px] border-collapse text-left">
                     <thead>
                       <tr>
-                        <th className="w-[34%] border-b border-r border-white/10 bg-white/[0.025] px-[22px] py-[21px] text-[9px] font-semibold uppercase tracking-[0.1em] text-[#737671]">
+                        <th className="w-[34%] border-b border-r border-white/10 bg-white/[0.025] px-[22px] py-[21px] text-[9px] font-semibold uppercase tracking-[0.1em] text-[#78909f]">
                           Specification
                         </th>
 
@@ -513,7 +513,7 @@ export function MachineDetailExperience({
                         specificationLabels.map((label) => (
                           <tr
                             key={label}
-                            className="transition-colors duration-200 hover:bg-[rgba(216,255,62,0.025)]"
+                            className="transition-colors duration-200 hover:bg-[rgba(31,143,193,0.055)]"
                           >
                             <td className="border-b border-r border-white/10 px-[22px] py-[21px] text-[11px] text-[#9b9e99]">
                               {label}
@@ -528,7 +528,7 @@ export function MachineDetailExperience({
                               return (
                                 <td
                                   key={model.id}
-                                  className="border-b border-r border-white/10 px-[22px] py-[21px] text-[#f2f0ea]"
+                                  className="border-b border-r border-white/10 px-[22px] py-[21px] text-[#f4f8fa]"
                                 >
                                   {specification ? (
                                     <>
@@ -554,7 +554,7 @@ export function MachineDetailExperience({
                         <tr>
                           <td
                             colSpan={machine.models.length + 1}
-                            className="px-5 py-[60px] text-center text-[#666964]"
+                            className="px-5 py-[60px] text-center text-[#718a99]"
                           >
                             Technical specifications will be added shortly.
                           </td>
@@ -574,7 +574,7 @@ export function MachineDetailExperience({
 
             <Link
               href="/contact"
-              className="group inline-flex items-center gap-[15px] text-[10px] font-semibold text-[#f2f0ea]"
+              className="group inline-flex items-center gap-[15px] text-[10px] font-semibold text-[#f4f8fa]"
             >
               Talk to engineering
               <ArrowUpRight
@@ -586,7 +586,7 @@ export function MachineDetailExperience({
         </div>
       </section>
 
-      <section className="flex items-end justify-between gap-[50px] bg-[#0b0c0c] px-[5vw] py-[110px] max-[700px]:flex-col max-[700px]:items-start max-[700px]:px-[18px] max-[700px]:py-20">
+      <section className="flex items-end justify-between gap-[50px] bg-[#07131a] px-[5vw] py-[110px] max-[700px]:flex-col max-[700px]:items-start max-[700px]:px-[18px] max-[700px]:py-20">
         <div>
           <span className={sectionIndexClass}>
             Talk to Engineering
@@ -594,7 +594,7 @@ export function MachineDetailExperience({
 
           <h2 className="m-0 max-w-[900px] text-[clamp(54px,6vw,100px)] font-medium leading-[0.9] tracking-[-0.065em]">
             Discuss your
-            <span className="block text-[#737671]">
+            <span className="block text-[#78909f]">
               production requirement.
             </span>
           </h2>
