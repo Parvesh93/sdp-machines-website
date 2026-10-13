@@ -3,11 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -17,37 +13,37 @@ gsap.registerPlugin(ScrollTrigger);
 const machines = [
   {
     number: "01",
-    title: "Multi Cutters",
-    eyebrow: "Automatic Bridge-Type",
+    title: "Multi Blade Block Cutters",
+    eyebrow: "Granite Cutting",
     description:
-      "High-output multi-blade cutting systems engineered for granite production.",
+      "For granite block cutting across different production requirements.",
     image: "/images/machines/multi-cutter.jpg",
-    href: "/machines/multi-cutters",
+    href: "/machines/automatic-bridge-multi-cutters",
   },
   {
     number: "02",
-    title: "Line Polishing",
-    eyebrow: "Surface Processing",
+    title: "Line Polishing Machines",
+    eyebrow: "Stone Finishing",
     description:
-      "Continuous polishing lines built for consistent finish and dependable throughput.",
+      "For the finishing stage of stone processing.",
     image: "/images/machines/lpm.jpg",
-    href: "/machines/line-polishing",
+    href: "/machines/granite-line-polishing",
   },
   {
     number: "03",
-    title: "Thin Wire",
-    eyebrow: "Precision Cutting",
+    title: "Thin Cut Multi Wire",
+    eyebrow: "Marble Cutting",
     description:
-      "Controlled wire-cutting systems for accurate processing and efficient material use.",
+      "For thin-slab marble cutting.",
     image: "/images/machines/thin-wire.jpg",
-    href: "/machines/thin-wire",
+    href: "/machines/thin-cut-multi-wire",
   },
   {
     number: "04",
-    title: "Handling & Cranes",
+    title: "Gantry & EOT Cranes",
     eyebrow: "Material Handling",
     description:
-      "Gantry and EOT handling systems designed around safer, more efficient stone movement.",
+      "For handling heavy loads across the plant.",
     image: "/images/machines/gantry.jpg",
     href: "/machines/handling-cranes",
   },
@@ -59,32 +55,18 @@ export function MachineShowcase() {
 
   useEffect(() => {
     const section = sectionRef.current;
-
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      const chapters =
-        gsap.utils.toArray<HTMLElement>(
-          ".machine-scroll-chapter",
-        );
-
-      const imagePanels =
-        gsap.utils.toArray<HTMLElement>(
-          ".machine-image-panel",
-        );
-
-      // Desktop: the image column stays sticky. Every incoming image is
-      // physically tied to scroll position, so stopping/reversing the
-      // scroll immediately stops/reverses the image transition.
+      const chapters = gsap.utils.toArray<HTMLElement>(".machine-scroll-chapter");
+      const imagePanels = gsap.utils.toArray<HTMLElement>(".machine-image-panel");
       const media = gsap.matchMedia();
 
       media.add("(min-width: 1024px)", () => {
         imagePanels.forEach((panel, index) => {
           gsap.set(panel, {
             clipPath:
-              index === 0
-                ? "inset(0% 0% 0% 0%)"
-                : "inset(100% 0% 0% 0%)",
+              index === 0 ? "inset(0% 0% 0% 0%)" : "inset(100% 0% 0% 0%)",
           });
         });
 
@@ -99,16 +81,12 @@ export function MachineShowcase() {
         });
 
         chapters.slice(1).forEach((chapter, chapterIndex) => {
-          const imageIndex = chapterIndex + 1;
-          const incoming = imagePanels[imageIndex];
-
+          const incoming = imagePanels[chapterIndex + 1];
           if (!incoming) return;
 
           gsap.fromTo(
             incoming,
-            {
-              clipPath: "inset(100% 0% 0% 0%)",
-            },
+            { clipPath: "inset(100% 0% 0% 0%)" },
             {
               clipPath: "inset(0% 0% 0% 0%)",
               ease: "none",
@@ -125,19 +103,12 @@ export function MachineShowcase() {
       });
 
       chapters.forEach((chapter) => {
-        const copy =
-          chapter.querySelector(
-            ".machine-scroll-copy",
-          );
-
+        const copy = chapter.querySelector(".machine-scroll-copy");
         if (!copy) return;
 
         gsap.fromTo(
           copy,
-          {
-            opacity: 0.32,
-            y: 54,
-          },
+          { opacity: 0.32, y: 54 },
           {
             opacity: 1,
             y: 0,
@@ -152,14 +123,10 @@ export function MachineShowcase() {
         );
       });
 
-      return () => {
-        media.revert();
-      };
+      return () => media.revert();
     }, section);
 
-    return () => {
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -175,18 +142,17 @@ export function MachineShowcase() {
               02 / Machine Range
             </span>
 
-            <h2 className="m-0 max-w-[820px] text-[clamp(42px,4.9vw,76px)] font-medium leading-[0.94] tracking-[-0.055em]">
-              Machines for
+            <h2 className="m-0 max-w-[860px] text-[clamp(42px,4.9vw,76px)] font-medium leading-[0.94] tracking-[-0.055em]">
+              Find the right machine
               <span className="ml-[0.18em] text-[#8fa6b4] max-[700px]:ml-0 max-[700px]:block">
-                continuous production.
+                for your plant.
               </span>
             </h2>
           </div>
 
           <div className="lg:justify-self-end">
             <p className="m-0 max-w-[340px] text-[11px] leading-[1.7] text-[#5f7480]">
-              Four core machine lines engineered for cutting, finishing and
-              material handling in continuous stone production.
+              Cutting, polishing, thin-slab processing and material handling for stone processing operations.
             </p>
 
             <div className="mt-5 flex items-center gap-3 text-[8px] font-semibold uppercase tracking-[0.13em] text-[#7f96a4]">
@@ -215,7 +181,6 @@ export function MachineShowcase() {
                     className="object-cover"
                     priority={index === 0}
                   />
-
                   <div className="absolute inset-0 bg-black/18" />
                 </div>
               ))}
@@ -231,8 +196,7 @@ export function MachineShowcase() {
                     <span className="text-[9px] font-semibold uppercase tracking-[0.12em] text-[#d2e0e7]/65">
                       {machines[activeIndex].eyebrow}
                     </span>
-
-                    <strong className="mt-2 block text-[clamp(30px,3.5vw,54px)] font-medium tracking-[-0.05em]">
+                    <strong className="mt-2 block max-w-[560px] text-[clamp(28px,3.2vw,50px)] font-medium tracking-[-0.05em]">
                       {machines[activeIndex].title}
                     </strong>
                   </div>
@@ -260,7 +224,6 @@ export function MachineShowcase() {
                       sizes="100vw"
                       className="object-cover"
                     />
-
                     <span className="absolute bottom-4 right-4 text-[11px] font-semibold tabular-nums text-[var(--site-accent)]">
                       {machine.number}
                     </span>
@@ -270,13 +233,12 @@ export function MachineShowcase() {
                     <span className="text-[10px] font-semibold tabular-nums text-[var(--site-accent)]">
                       {machine.number}
                     </span>
-
                     <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-[#6e8796]">
                       {machine.eyebrow}
                     </span>
                   </div>
 
-                  <h3 className="mt-10 text-[clamp(48px,5.3vw,88px)] font-medium leading-[0.9] tracking-[-0.065em]">
+                  <h3 className="mt-10 max-w-[720px] text-[clamp(42px,4.8vw,78px)] font-medium leading-[0.92] tracking-[-0.06em]">
                     {machine.title}
                   </h3>
 
@@ -288,7 +250,7 @@ export function MachineShowcase() {
                     href={machine.href}
                     className="group mt-9 inline-flex items-center gap-4 text-[10px] font-semibold"
                   >
-                    Explore machine
+                    View Machine Details
                     <ArrowUpRight
                       size={17}
                       className="text-[var(--site-accent)] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
@@ -296,7 +258,6 @@ export function MachineShowcase() {
                   </Link>
 
                   <div className="mt-12 h-px w-16 bg-[var(--site-accent)]" />
-
                   <span className="mt-4 block text-[8px] uppercase tracking-[0.13em] text-[#8fa6b4]">
                     0{index + 1} / 04
                   </span>
