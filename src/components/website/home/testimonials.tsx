@@ -120,16 +120,16 @@ export function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#f4f7fa] px-[5vw] py-20 text-[#0b1720] lg:py-24 max-[650px]:px-[18px]"
+      className="relative overflow-hidden bg-[#f4f7fa] px-[5vw] py-20 text-[#0b1720] lg:py-24 max-[650px]:px-[18px] max-[650px]:py-14"
     >
       <div className="mx-auto w-full max-w-[1600px]">
-        <div className="testimonial-heading mb-10 grid gap-6 lg:grid-cols-[1.25fr_.75fr] lg:items-end">
+        <div className="testimonial-heading mb-10 grid gap-6 lg:grid-cols-[1.25fr_.75fr] lg:items-end max-[650px]:mb-6 max-[650px]:gap-3">
           <div>
-            <span className="mb-4 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
+            <span className="mb-4 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)] max-[650px]:mb-3">
               Customer Voices
             </span>
 
-            <h2 className="max-w-[860px] text-[clamp(42px,5vw,76px)] font-medium leading-[0.92] tracking-[-0.06em]">
+            <h2 className="max-w-[860px] text-[clamp(42px,5vw,76px)] font-medium leading-[0.92] tracking-[-0.06em] max-[650px]:text-[34px]">
               What matters
               <span className="ml-[0.18em] text-[#8fa6b4] max-[700px]:ml-0 max-[700px]:block">
                 after the machine starts.
@@ -137,14 +137,14 @@ export function Testimonials() {
             </h2>
           </div>
 
-          <p className="max-w-[390px] text-[11px] leading-[1.8] text-[#5f7480] lg:justify-self-end">
+          <p className="max-w-[390px] text-[11px] leading-[1.8] text-[#5f7480] lg:justify-self-end max-[650px]:hidden">
             Long-term production and responsive support are what customers
             remember after commissioning.
           </p>
         </div>
 
         <div className="testimonial-panel overflow-hidden border border-[#ccd7de] bg-white lg:grid lg:grid-cols-[.34fr_1.66fr]">
-          <div className="flex min-h-[330px] flex-col justify-between bg-[#0b1720] p-7 text-white lg:min-h-[360px] lg:p-8">
+          <div className="flex min-h-[330px] flex-col justify-between bg-[#0b1720] p-7 text-white lg:min-h-[360px] lg:p-8 max-[650px]:min-h-[138px] max-[650px]:p-5">
             <div className="flex items-start justify-between">
               <Quote size={22} className="text-[var(--site-accent)]" />
 
@@ -157,11 +157,11 @@ export function Testimonials() {
               <span className="block text-[8px] uppercase tracking-[0.15em] text-[#8fa6b4]">
                 Location
               </span>
-              <strong className="mt-2 block text-[28px] font-medium tracking-[-0.045em]">
+              <strong className="mt-2 block text-[28px] font-medium tracking-[-0.045em] max-[650px]:text-[22px]">
                 {active.location}
               </strong>
 
-              <span className="mt-5 block max-w-[220px] text-[10px] leading-5 text-[#a9beca]/75">
+              <span className="mt-5 block max-w-[220px] text-[10px] leading-5 text-[#a9beca]/75 max-[650px]:mt-2">
                 {active.company}
               </span>
             </div>
@@ -169,14 +169,14 @@ export function Testimonials() {
 
           <div
             ref={quoteRef}
-            className="flex min-h-[330px] flex-col justify-between p-7 lg:min-h-[360px] lg:p-10"
+            className="flex min-h-[330px] flex-col justify-between p-7 lg:min-h-[360px] lg:p-10 max-[650px]:min-h-0 max-[650px]:p-5"
           >
-            <blockquote className="max-w-[980px] text-[clamp(28px,3.2vw,52px)] font-medium leading-[1.06] tracking-[-0.045em] text-[#10212c]">
+            <blockquote className="max-w-[980px] text-[clamp(28px,3.2vw,52px)] font-medium leading-[1.06] tracking-[-0.045em] text-[#10212c] max-[650px]:text-[24px]">
               “{active.quote}”
             </blockquote>
 
-            <div className="mt-10 flex flex-col gap-5 border-t border-[#d8e1e6] pt-5 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex flex-wrap gap-x-5 gap-y-2">
+            <div className="mt-10 flex flex-col gap-5 border-t border-[#d8e1e6] pt-5 sm:flex-row sm:items-center sm:justify-between max-[650px]:mt-6 max-[650px]:gap-4 max-[650px]:pt-4">
+              <div className="flex flex-wrap gap-x-5 gap-y-2 max-[650px]:gap-x-3">
                 {testimonials.map((item, index) => {
                   const isActive = index === activeIndex;
 
@@ -209,7 +209,7 @@ export function Testimonials() {
                   type="button"
                   onClick={previous}
                   aria-label="Previous testimonial"
-                  className="grid h-10 w-10 place-items-center border border-[#c3d0d7] text-[#0b1720] transition hover:bg-[#eef3f6]"
+                  className="grid h-10 w-10 place-items-center border border-[#c3d0d7] text-[#0b1720] transition hover:bg-[#eef3f6] max-[650px]:h-9 max-[650px]:w-9"
                 >
                   <ArrowLeft size={15} />
                 </button>
@@ -218,7 +218,7 @@ export function Testimonials() {
                   type="button"
                   onClick={next}
                   aria-label="Next testimonial"
-                  className="grid h-10 w-10 place-items-center bg-[var(--site-accent)] text-white transition hover:-translate-y-0.5 hover:bg-[#147aa5]"
+                  className="grid h-10 w-10 place-items-center bg-[var(--site-accent)] text-white transition hover:-translate-y-0.5 hover:bg-[#147aa5] max-[650px]:h-9 max-[650px]:w-9"
                 >
                   <ArrowRight size={15} />
                 </button>
