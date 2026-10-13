@@ -79,13 +79,15 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2.5">
-            <Link
-              href="/contact"
-              className={`${quoteButtonClass} hidden min-[1080px]:inline-flex`}
-            >
-              <span>Get a Quote</span>
-              <ArrowUpRight size={16} />
-            </Link>
+            <div className="hidden min-[1080px]:block">
+              <Link
+                href="/contact"
+                className={quoteButtonClass}
+              >
+                <span>Get a Quote</span>
+                <ArrowUpRight size={16} />
+              </Link>
+            </div>
 
             <button
               type="button"
