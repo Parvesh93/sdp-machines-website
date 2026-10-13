@@ -2,27 +2,26 @@
 
 import type { ReactNode } from "react";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 type SmoothScrollProps = {
   children: ReactNode;
 };
 
-function hasNativeScrollableParent(target: EventTarget | null) {
-  let element =
-    target instanceof HTMLElement ? target : null;
+function isInteractiveOrNativeScrollTarget(target: EventTarget | null) {
+  let element = target instanceof HTMLElement ? target : null;
 
   while (element && element !== document.body) {
     const styles = window.getComputedStyle(element);
     const overflowY = styles.overflowY;
-    const scrollable =
+    const isScrollable =
       (overflowY === "auto" || overflowY === "scroll") &&
       element.scrollHeight > element.clientHeight + 2;
 
     if (
-      scrollable ||
+      isScrollable ||
       element.hasAttribute("data-native-scroll") ||
-      element.tagName === "TEXTAREA" ||
-      element.tagName === "SELECT"
+      element.matches("textarea, select, input[type='range']")
     ) {
       return true;
     }
@@ -33,65 +32,51 @@ function hasNativeScrollableParent(target: EventTarget | null) {
   return false;
 }
 
-export function SmoothScroll({
-  children,
-}: SmoothScrollProps) {
+export function SmoothScroll({ children }: SmoothScrollProps) {
+  const pathname = usePathname();
+
   useEffect(() => {
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    );
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarsePointer = window.matchMedia("(pointer: coarse)");
 
-    const coarsePointer = window.matchMedia(
-      "(pointer: coarse)",
-    );
-
-    if (
-      reduceMotion.matches ||
-      coarsePointer.matches
-    ) {
-      return;
-    }
+    if (reduceMotion.matches || coarsePointer.matches) return;
 
     let current = window.scrollY;
     let target = current;
-    let frame: number | null = null;
+    let rafId: number | null = null;
+
+    const maxScroll = () =>
+      Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        0,
+      );
 
     const clampTarget = () => {
-      const max =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
-
-      target = Math.min(
-        Math.max(target, 0),
-        Math.max(max, 0),
-      );
+      target = Math.min(Math.max(target, 0), maxScroll());
     };
 
-    const animate = () => {
+    const render = () => {
       const distance = target - current;
+      const eased = distance * 0.11;
 
-      current += distance * 0.105;
+      current += eased;
 
-      if (Math.abs(distance) < 0.35) {
+      if (Math.abs(distance) < 0.45) {
         current = target;
       }
 
       window.scrollTo(0, current);
 
       if (current !== target) {
-        frame = window.requestAnimationFrame(
-          animate,
-        );
+        rafId = window.requestAnimationFrame(render);
       } else {
-        frame = null;
+        rafId = null;
       }
     };
 
-    const startAnimation = () => {
-      if (frame === null) {
-        frame = window.requestAnimationFrame(
-          animate,
-        );
+    const requestRender = () => {
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(render);
       }
     };
 
@@ -99,20 +84,23 @@ export function SmoothScroll({
       if (
         event.ctrlKey ||
         event.metaKey ||
-        hasNativeScrollableParent(event.target)
+        isInteractiveOrNativeScrollTarget(event.target)
       ) {
         return;
       }
 
       event.preventDefault();
 
-      target += event.deltaY * 0.9;
+      const multiplier = event.deltaMode === 1 ? 18 : event.deltaMode === 2 ? window.innerHeight : 1;
+      const delta = event.deltaY * multiplier;
+
+      target += delta * 0.88;
       clampTarget();
-      startAnimation();
+      requestRender();
     };
 
-    const handleScroll = () => {
-      if (frame === null) {
+    const syncToNativePosition = () => {
+      if (rafId === null) {
         current = window.scrollY;
         target = current;
       }
@@ -124,44 +112,58 @@ export function SmoothScroll({
       clampTarget();
     };
 
-    window.addEventListener(
-      "wheel",
-      handleWheel,
-      { passive: false },
-    );
+    const handleClick = (event: MouseEvent) => {
+      const targetElement = event.target instanceof Element ? event.target : null;
+      const anchor = targetElement?.closest<HTMLAnchorElement>('a[href^="#"]');
 
-    window.addEventListener(
-      "scroll",
-      handleScroll,
-      { passive: true },
-    );
+      if (!anchor) return;
 
-    window.addEventListener(
-      "resize",
-      handleResize,
-    );
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const id = decodeURIComponent(href.slice(1));
+      const destination = document.getElementById(id);
+      if (!destination) return;
+
+      event.preventDefault();
+
+      const headerOffset = 86;
+      target = destination.getBoundingClientRect().top + window.scrollY - headerOffset;
+      clampTarget();
+      requestRender();
+
+      history.pushState(null, "", href);
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("scroll", syncToNativePosition, { passive: true });
+    window.addEventListener("resize", handleResize);
+    document.addEventListener("click", handleClick);
 
     return () => {
-      if (frame !== null) {
-        window.cancelAnimationFrame(frame);
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
       }
 
-      window.removeEventListener(
-        "wheel",
-        handleWheel,
-      );
-
-      window.removeEventListener(
-        "scroll",
-        handleScroll,
-      );
-
-      window.removeEventListener(
-        "resize",
-        handleResize,
-      );
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("scroll", syncToNativePosition);
+      window.removeEventListener("resize", handleResize);
+      document.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+
+    const id = decodeURIComponent(hash.slice(1));
+    const destination = document.getElementById(id);
+    if (!destination) return;
+
+    window.requestAnimationFrame(() => {
+      destination.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [pathname]);
 
   return children;
 }
