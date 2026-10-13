@@ -1,7 +1,7 @@
 "use client";
 
+import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -35,46 +35,37 @@ const testimonials = [
 export function Testimonials() {
   const sectionRef = useRef<HTMLElement>(null);
   const quoteRef = useRef<HTMLDivElement>(null);
-
   const [activeIndex, setActiveIndex] = useState(0);
 
   const active = testimonials[activeIndex];
 
   useEffect(() => {
     const section = sectionRef.current;
-
     if (!section) return;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        ".testimonial-editorial-heading",
-        {
-          opacity: 0,
-          y: 35,
-        },
+        ".testimonial-heading",
+        { opacity: 0, y: 28 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.9,
+          duration: 0.75,
           ease: "power3.out",
           scrollTrigger: {
             trigger: section,
-            start: "top 75%",
+            start: "top 80%",
           },
         },
       );
 
       gsap.fromTo(
-        ".testimonial-editorial-quote",
-        {
-          opacity: 0,
-          y: 45,
-        },
+        ".testimonial-panel",
+        { opacity: 0, y: 32 },
         {
           opacity: 1,
           y: 0,
-          duration: 1,
-          delay: 0.12,
+          duration: 0.85,
           ease: "power3.out",
           scrollTrigger: {
             trigger: section,
@@ -84,9 +75,7 @@ export function Testimonials() {
       );
     }, section);
 
-    return () => {
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   function changeTestimonial(index: number) {
@@ -103,260 +92,116 @@ export function Testimonials() {
       .timeline()
       .to(quote, {
         opacity: 0,
-        y: -20,
-        duration: 0.25,
+        y: -12,
+        duration: 0.2,
         ease: "power2.in",
       })
-      .call(() => {
-        setActiveIndex(index);
-      })
+      .call(() => setActiveIndex(index))
       .fromTo(
         quote,
-        {
-          opacity: 0,
-          y: 24,
-        },
+        { opacity: 0, y: 14 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
+          duration: 0.4,
           ease: "power3.out",
         },
       );
   }
 
-  function previous() {
+  const previous = () =>
     changeTestimonial(
-      activeIndex === 0
-        ? testimonials.length - 1
-        : activeIndex - 1,
+      activeIndex === 0 ? testimonials.length - 1 : activeIndex - 1,
     );
-  }
 
-  function next() {
-    changeTestimonial(
-      (activeIndex + 1) % testimonials.length,
-    );
-  }
+  const next = () =>
+    changeTestimonial((activeIndex + 1) % testimonials.length);
 
   return (
     <section
       ref={sectionRef}
-      className="
-        relative
-        overflow-hidden
-        bg-[#f4f7fa]
-        px-[5vw]
-        py-28
-        text-[#0b1720]
-        lg:py-36
-      "
+      className="relative overflow-hidden bg-[#f4f7fa] px-[5vw] py-20 text-[#0b1720] lg:py-24 max-[650px]:px-[18px]"
     >
       <div className="mx-auto w-full max-w-[1600px]">
-        {/* HEADER */}
-
-        <div
-          className="
-            testimonial-editorial-heading
-            mb-20
-            grid
-            gap-10
-            lg:grid-cols-[1.4fr_.6fr]
-            lg:items-end
-          "
-        >
+        <div className="testimonial-heading mb-10 grid gap-6 lg:grid-cols-[1.25fr_.75fr] lg:items-end">
           <div>
-            <span
-              className="
-                mb-6
-                block
-                text-[9px]
-                font-bold
-                uppercase
-                tracking-[.17em]
-                text-[#6e8796]
-              "
-            >
-              05 / Customer Voices
+            <span className="mb-4 block text-[9px] font-bold uppercase tracking-[0.17em] text-[var(--site-accent)]">
+              Customer Voices
             </span>
 
-            <h2
-              className="
-                max-w-[1000px]
-                text-[clamp(54px,6.4vw,108px)]
-                font-medium
-                leading-[.89]
-                tracking-[-.068em]
-              "
-            >
+            <h2 className="max-w-[860px] text-[clamp(42px,5vw,76px)] font-medium leading-[0.92] tracking-[-0.06em]">
               What matters
-              <span className="block text-[#8fa6b4]">
+              <span className="ml-[0.18em] text-[#8fa6b4] max-[700px]:ml-0 max-[700px]:block">
                 after the machine starts.
               </span>
             </h2>
           </div>
 
-          <p
-            className="
-              max-w-[390px]
-              text-[12px]
-              leading-7
-              text-[#5f7480]
-            "
-          >
-            Industrial machinery is judged over
-            production cycles, not presentation
-            slides. Customer experience becomes the
-            real measure of engineering.
+          <p className="max-w-[390px] text-[11px] leading-[1.8] text-[#5f7480] lg:justify-self-end">
+            Long-term production and responsive support are what customers
+            remember after commissioning.
           </p>
         </div>
 
-        {/* MAIN QUOTE AREA */}
+        <div className="testimonial-panel overflow-hidden border border-[#ccd7de] bg-white lg:grid lg:grid-cols-[.34fr_1.66fr]">
+          <div className="flex min-h-[330px] flex-col justify-between bg-[#0b1720] p-7 text-white lg:min-h-[360px] lg:p-8">
+            <div className="flex items-start justify-between">
+              <Quote size={22} className="text-[var(--site-accent)]" />
 
-        <div
-          className="
-            grid
-            border-y
-            border-[#ccd7de]
-            lg:grid-cols-[.32fr_1.68fr]
-          "
-        >
-          {/* INDEX */}
-
-          <div
-            className="
-              flex
-              min-h-[520px]
-              flex-col
-              justify-between
-              border-[#ccd7de]
-              py-8
-              pr-8
-              lg:border-r
-              lg:py-10
-            "
-          >
-            <div>
-              <span
-                className="
-                  block
-                  text-[9px]
-                  font-bold
-                  uppercase
-                  tracking-[.15em]
-                  text-[#8fa6b4]
-                "
-              >
-                Customer / Experience
+              <span className="text-[9px] font-semibold tracking-[0.14em] text-[#8fa6b4]">
+                {active.number} / 0{testimonials.length}
               </span>
-
-              <strong
-                className="
-                  mt-5
-                  block
-                  text-[clamp(70px,8vw,130px)]
-                  font-medium
-                  leading-none
-                  tracking-[-.075em]
-                "
-              >
-                {active.number}
-              </strong>
             </div>
 
             <div>
-              <span
-                className="
-                  block
-                  text-[9px]
-                  uppercase
-                  tracking-[.14em]
-                  text-[#8fa6b4]
-                "
-              >
+              <span className="block text-[8px] uppercase tracking-[0.15em] text-[#8fa6b4]">
                 Location
               </span>
-
-              <strong
-                className="
-                  mt-2
-                  block
-                  text-[22px]
-                  font-medium
-                  tracking-[-.04em]
-                "
-              >
+              <strong className="mt-2 block text-[28px] font-medium tracking-[-0.045em]">
                 {active.location}
               </strong>
+
+              <span className="mt-5 block max-w-[220px] text-[10px] leading-5 text-[#a9beca]/75">
+                {active.company}
+              </span>
             </div>
           </div>
 
-          {/* QUOTE */}
-
           <div
             ref={quoteRef}
-            className="
-              testimonial-editorial-quote
-              flex
-              min-h-[520px]
-              flex-col
-              justify-between
-              py-8
-              pl-0
-              lg:py-10
-              lg:pl-12
-            "
+            className="flex min-h-[330px] flex-col justify-between p-7 lg:min-h-[360px] lg:p-10"
           >
-            <blockquote
-              className="
-                max-w-[1050px]
-                text-[clamp(34px,4.2vw,70px)]
-                font-medium
-                leading-[1.03]
-                tracking-[-.05em]
-                text-[#10212c]
-              "
-            >
+            <blockquote className="max-w-[980px] text-[clamp(28px,3.2vw,52px)] font-medium leading-[1.06] tracking-[-0.045em] text-[#10212c]">
               “{active.quote}”
             </blockquote>
 
-            <div
-              className="
-                mt-16
-                flex
-                flex-col
-                gap-6
-                border-t
-                border-[#ccd7de]
-                pt-6
-                sm:flex-row
-                sm:items-end
-                sm:justify-between
-              "
-            >
-              <div>
-                <span
-                  className="
-                    block
-                    text-[9px]
-                    uppercase
-                    tracking-[.14em]
-                    text-[#8fa6b4]
-                  "
-                >
-                  Customer
-                </span>
+            <div className="mt-10 flex flex-col gap-5 border-t border-[#d8e1e6] pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-wrap gap-x-5 gap-y-2">
+                {testimonials.map((item, index) => {
+                  const isActive = index === activeIndex;
 
-                <strong
-                  className="
-                    mt-2
-                    block
-                    text-[14px]
-                    font-semibold
-                  "
-                >
-                  {active.company}
-                </strong>
+                  return (
+                    <button
+                      key={item.number}
+                      type="button"
+                      onClick={() => changeTestimonial(index)}
+                      className={
+                        isActive
+                          ? "text-[9px] font-semibold uppercase tracking-[0.12em] text-[#0b1720]"
+                          : "text-[9px] font-semibold uppercase tracking-[0.12em] text-[#8fa6b4] transition-colors hover:text-[#506977]"
+                      }
+                    >
+                      <span
+                        className={
+                          isActive
+                            ? "mr-2 inline-block h-[6px] w-[6px] rounded-full bg-[var(--site-accent)] align-middle"
+                            : "mr-2 inline-block h-[6px] w-[6px] rounded-full bg-[#c9d6dd] align-middle"
+                        }
+                      />
+                      {item.location}
+                    </button>
+                  );
+                })}
               </div>
 
               <div className="flex gap-2">
@@ -364,149 +209,22 @@ export function Testimonials() {
                   type="button"
                   onClick={previous}
                   aria-label="Previous testimonial"
-                  className="
-                    grid
-                    h-11
-                    w-11
-                    place-items-center
-                    border
-                    border-[#b9cbd5]
-                    transition
-                    hover:bg-[#e2ebf0]
-                  "
+                  className="grid h-10 w-10 place-items-center border border-[#c3d0d7] text-[#0b1720] transition hover:bg-[#eef3f6]"
                 >
-                  <ArrowLeft size={16} />
+                  <ArrowLeft size={15} />
                 </button>
 
                 <button
                   type="button"
                   onClick={next}
                   aria-label="Next testimonial"
-                  className="
-                    grid
-                    h-11
-                    w-11
-                    place-items-center
-                    bg-[var(--site-accent)]
-                    text-[#111]
-                    transition-transform
-                    hover:-translate-y-0.5
-                  "
+                  className="grid h-10 w-10 place-items-center bg-[var(--site-accent)] text-white transition hover:-translate-y-0.5 hover:bg-[#147aa5]"
                 >
-                  <ArrowRight size={16} />
+                  <ArrowRight size={15} />
                 </button>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* LOCATION NAVIGATION */}
-
-        <div
-          className="
-            mt-10
-            grid
-            border-t
-            border-[#ccd7de]
-            sm:grid-cols-3
-          "
-        >
-          {testimonials.map((item, index) => {
-            const activeItem =
-              index === activeIndex;
-
-            return (
-              <button
-                key={item.number}
-                type="button"
-                onClick={() =>
-                  changeTestimonial(index)
-                }
-                className="
-                  group
-                  flex
-                  min-h-[110px]
-                  items-end
-                  justify-between
-                  gap-5
-                  border-b
-                  border-[#ccd7de]
-                  py-5
-                  text-left
-                  transition
-                  sm:border-r
-                  sm:px-5
-                  sm:last:border-r-0
-                "
-              >
-                <div>
-                  <span
-                    className={
-                      activeItem
-                        ? `
-                          block
-                          text-[9px]
-                          font-bold
-                          text-[var(--site-accent)]
-                        `
-                        : `
-                          block
-                          text-[9px]
-                          font-bold
-                          text-[#93a9b6]
-                        `
-                    }
-                  >
-                    {item.number}
-                  </span>
-
-                  <strong
-                    className={
-                      activeItem
-                        ? `
-                          mt-3
-                          block
-                          text-[22px]
-                          font-medium
-                          tracking-[-.04em]
-                          text-[#0b1720]
-                        `
-                        : `
-                          mt-3
-                          block
-                          text-[22px]
-                          font-medium
-                          tracking-[-.04em]
-                          text-[#8fa6b4]
-                          transition-colors
-                          group-hover:text-[#506977]
-                        `
-                    }
-                  >
-                    {item.location}
-                  </strong>
-                </div>
-
-                <span
-                  className={
-                    activeItem
-                      ? `
-                        h-2
-                        w-2
-                        rounded-full
-                        bg-[var(--site-accent)]
-                      `
-                      : `
-                        h-2
-                        w-2
-                        rounded-full
-                        bg-[#b9cbd5]
-                      `
-                  }
-                />
-              </button>
-            );
-          })}
         </div>
       </div>
     </section>
