@@ -145,10 +145,10 @@ export function Testimonials() {
       className="
         relative
         overflow-hidden
-        bg-[#f4f7fa]
+        bg-[#e9e8e2]
         px-[5vw]
         py-28
-        text-[#0b1720]
+        text-[#171817]
         lg:py-36
       "
     >
@@ -174,7 +174,7 @@ export function Testimonials() {
                 font-bold
                 uppercase
                 tracking-[.17em]
-                text-[#6e8796]
+                text-[#77766f]
               "
             >
               05 / Customer Voices
@@ -190,7 +190,7 @@ export function Testimonials() {
               "
             >
               What matters
-              <span className="block text-[#8fa6b4]">
+              <span className="block text-[#999890]">
                 after the machine starts.
               </span>
             </h2>
@@ -201,7 +201,7 @@ export function Testimonials() {
               max-w-[390px]
               text-[12px]
               leading-7
-              text-[#5f7480]
+              text-[#666860]
             "
           >
             Industrial machinery is judged over
@@ -217,7 +217,7 @@ export function Testimonials() {
           className="
             grid
             border-y
-            border-[#ccd7de]
+            border-[#c7c6bf]
             lg:grid-cols-[.32fr_1.68fr]
           "
         >
@@ -229,7 +229,7 @@ export function Testimonials() {
               min-h-[520px]
               flex-col
               justify-between
-              border-[#ccd7de]
+              border-[#c7c6bf]
               py-8
               pr-8
               lg:border-r
@@ -244,7 +244,7 @@ export function Testimonials() {
                   font-bold
                   uppercase
                   tracking-[.15em]
-                  text-[#8fa6b4]
+                  text-[#999890]
                 "
               >
                 Customer / Experience
@@ -271,7 +271,7 @@ export function Testimonials() {
                   text-[9px]
                   uppercase
                   tracking-[.14em]
-                  text-[#8fa6b4]
+                  text-[#9b9a92]
                 "
               >
                 Location
@@ -314,7 +314,7 @@ export function Testimonials() {
                 font-medium
                 leading-[1.03]
                 tracking-[-.05em]
-                text-[#10212c]
+                text-[#242522]
               "
             >
               “{active.quote}”
@@ -327,7 +327,7 @@ export function Testimonials() {
                 flex-col
                 gap-6
                 border-t
-                border-[#ccd7de]
+                border-[#c7c6bf]
                 pt-6
                 sm:flex-row
                 sm:items-end
@@ -341,7 +341,7 @@ export function Testimonials() {
                     text-[9px]
                     uppercase
                     tracking-[.14em]
-                    text-[#8fa6b4]
+                    text-[#999890]
                   "
                 >
                   Customer
@@ -370,9 +370,9 @@ export function Testimonials() {
                     w-11
                     place-items-center
                     border
-                    border-[#b9cbd5]
+                    border-[#bab9b1]
                     transition
-                    hover:bg-[#e2ebf0]
+                    hover:bg-[#d7d6cf]
                   "
                 >
                   <ArrowLeft size={16} />
@@ -407,7 +407,7 @@ export function Testimonials() {
             mt-10
             grid
             border-t
-            border-[#ccd7de]
+            border-[#c7c6bf]
             sm:grid-cols-3
           "
         >
@@ -430,7 +430,7 @@ export function Testimonials() {
                   justify-between
                   gap-5
                   border-b
-                  border-[#ccd7de]
+                  border-[#c7c6bf]
                   py-5
                   text-left
                   transition
@@ -453,7 +453,7 @@ export function Testimonials() {
                           block
                           text-[9px]
                           font-bold
-                          text-[#93a9b6]
+                          text-[#a09f97]
                         `
                     }
                   >
@@ -469,7 +469,7 @@ export function Testimonials() {
                           text-[22px]
                           font-medium
                           tracking-[-.04em]
-                          text-[#0b1720]
+                          text-[#171817]
                         `
                         : `
                           mt-3
@@ -477,9 +477,9 @@ export function Testimonials() {
                           text-[22px]
                           font-medium
                           tracking-[-.04em]
-                          text-[#8fa6b4]
+                          text-[#999890]
                           transition-colors
-                          group-hover:text-[#506977]
+                          group-hover:text-[#55564f]
                         `
                     }
                   >
@@ -500,7 +500,7 @@ export function Testimonials() {
                         h-2
                         w-2
                         rounded-full
-                        bg-[#b9cbd5]
+                        bg-[#bdbcB5]
                       `
                   }
                 />

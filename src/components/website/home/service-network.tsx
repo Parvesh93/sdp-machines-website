@@ -137,7 +137,7 @@ export function ServiceNetwork() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#07131a] px-[5vw] py-[120px] text-[#f4f8fa] max-[650px]:px-[18px] max-[650px]:py-20"
+      className="relative overflow-hidden bg-[#111111] px-[5vw] py-[120px] text-[#f2f0ea] max-[650px]:px-[18px] max-[650px]:py-20"
     >
       <div className="mx-auto w-full max-w-[1600px]">
         <div className="mb-16 grid gap-10 lg:grid-cols-[1.3fr_.7fr] lg:items-end">
@@ -148,14 +148,14 @@ export function ServiceNetwork() {
 
             <h2 className="m-0 max-w-[1000px] text-[clamp(54px,6.4vw,108px)] font-medium leading-[0.88] tracking-[-0.068em]">
               Proven in production.
-              <span className="block text-[#93aab8]/55">
+              <span className="block text-white/40">
                 Supported across India.
               </span>
             </h2>
           </div>
 
           <div className="lg:justify-self-end">
-            <p className="m-0 max-w-[390px] text-[12px] leading-7 text-[#a9beca]/65">
+            <p className="m-0 max-w-[390px] text-[12px] leading-7 text-white/50">
               Manufacturing in Ajmer backed by regional service offices across
               key stone-processing markets.
             </p>
@@ -173,12 +173,12 @@ export function ServiceNetwork() {
           </div>
         </div>
 
-        <div className="grid border border-[#8fb4c8]/20 lg:grid-cols-[.58fr_1.42fr]">
-          <div className="border-[#8fb4c8]/20 lg:border-r">
+        <div className="grid border border-white/15 lg:grid-cols-[.58fr_1.42fr]">
+          <div className="border-white/15 lg:border-r">
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="grid min-h-[150px] grid-cols-[minmax(0,1fr)_auto] items-end gap-6 border-b border-[#8fb4c8]/20 p-7 last:border-b-0 lg:min-h-[175px]"
+                className="grid min-h-[150px] grid-cols-[minmax(0,1fr)_auto] items-end gap-6 border-b border-white/15 p-7 last:border-b-0 lg:min-h-[175px]"
               >
                 <strong
                   ref={(element) => {
@@ -189,7 +189,7 @@ export function ServiceNetwork() {
                   0{stat.suffix}
                 </strong>
 
-                <span className="pb-1 text-right text-[9px] uppercase tracking-[0.12em] text-[#9fb6c4]/60">
+                <span className="pb-1 text-right text-[9px] uppercase tracking-[0.12em] text-white/45">
                   {stat.label}
                 </span>
               </div>
@@ -200,13 +200,13 @@ export function ServiceNetwork() {
                 1995
               </strong>
 
-              <span className="pb-1 text-right text-[9px] uppercase tracking-[0.12em] text-[#9fb6c4]/60">
+              <span className="pb-1 text-right text-[9px] uppercase tracking-[0.12em] text-white/45">
                 Engineering Since
               </span>
             </div>
           </div>
 
-          <div className="relative min-h-[650px] overflow-hidden bg-[#0b1720] max-[650px]:min-h-[500px]">
+          <div className="relative min-h-[650px] overflow-hidden bg-[#181818] max-[650px]:min-h-[500px]">
             <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:64px_64px]" />
 
             <div className="absolute inset-[7%]">
@@ -227,7 +227,7 @@ export function ServiceNetwork() {
                   pathLength="1"
                   d="M36 36 L29 45 M36 36 L51 57 L55 66 L45 78"
                   fill="none"
-                  stroke="rgba(31,143,193,.52)"
+                  stroke="rgba(243,107,33,.48)"
                   strokeWidth="0.35"
                   strokeDasharray="1"
                   strokeDashoffset="1"
@@ -261,7 +261,7 @@ export function ServiceNetwork() {
                         x={centre.x + (index % 2 === 0 ? 3 : -3)}
                         y={centre.y - 2}
                         textAnchor={index % 2 === 0 ? "start" : "end"}
-                        fill="#b7cbd6"
+                        fill="#c7c6bf"
                         fontSize="2.15"
                       >
                         {centre.name}
@@ -272,7 +272,7 @@ export function ServiceNetwork() {
               </svg>
             </div>
 
-            <div className="absolute bottom-7 left-7 z-10 flex flex-wrap gap-x-7 gap-y-3 text-[8px] font-semibold uppercase tracking-[0.12em] text-[#93aab8]/55">
+            <div className="absolute bottom-7 left-7 z-10 flex flex-wrap gap-x-7 gap-y-3 text-[8px] font-semibold uppercase tracking-[0.12em] text-white/40">
               <span className="inline-flex items-center gap-2">
                 <i className="h-2 w-2 rounded-full bg-[var(--site-accent)]" />
                 Head Office
@@ -284,10 +284,10 @@ export function ServiceNetwork() {
             </div>
 
             <div className="absolute right-7 top-7 text-right">
-              <span className="block text-[8px] uppercase tracking-[0.14em] text-[#8fa6b4]/40">
+              <span className="block text-[8px] uppercase tracking-[0.14em] text-white/25">
                 SDP / India
               </span>
-              <span className="mt-1 block text-[9px] text-[#93aab8]/55">
+              <span className="mt-1 block text-[9px] text-white/40">
                 Service beyond warranty
               </span>
             </div>

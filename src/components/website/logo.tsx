@@ -5,7 +5,7 @@ export function Logo() {
   return (
     <Link
       href="/"
-      className="inline-flex items-center gap-[13px] text-[#f4f8fa] max-[700px]:gap-2.5"
+      className="inline-flex items-center gap-[13px] text-[#f2f0ea] max-[700px]:gap-2.5"
       aria-label="SDP Machines home"
     >
       <span className="flex h-[54px] w-[60px] shrink-0 items-center justify-center overflow-visible bg-transparent max-[700px]:h-[45px] max-[700px]:w-[50px]">
@@ -24,7 +24,7 @@ export function Logo() {
           SDP MACHINES
         </strong>
 
-        <small className="whitespace-nowrap text-[7px] font-semibold uppercase leading-[1.2] tracking-[0.13em] text-[#8fa6b4] max-[700px]:hidden">
+        <small className="whitespace-nowrap text-[7px] font-semibold uppercase leading-[1.2] tracking-[0.13em] text-[#777a75] max-[700px]:hidden">
           Stone Processing Machines
         </small>
       </span>

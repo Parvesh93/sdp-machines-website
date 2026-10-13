@@ -196,8 +196,8 @@ export function SitePreloader() {
       className="
         fixed inset-0 z-[99999]
         overflow-hidden
-        bg-[#061018]
-        text-[#f4f8fa]
+        bg-[#090a09]
+        text-[#f2f0ea]
       "
     >
       {/* SHUTTERS */}
@@ -207,7 +207,7 @@ export function SitePreloader() {
         className="
           absolute left-0 right-0 top-0
           h-1/2
-          bg-[#061018]
+          bg-[#090a09]
         "
       />
 
@@ -216,7 +216,7 @@ export function SitePreloader() {
         className="
           absolute bottom-0 left-0 right-0
           h-1/2
-          bg-[#061018]
+          bg-[#090a09]
         "
       />
 
@@ -231,7 +231,7 @@ export function SitePreloader() {
           absolute left-[5vw] right-[5vw] top-8 z-20
           flex items-center justify-between
           text-[8px] font-bold uppercase
-          tracking-[.16em] text-[#8fb4c8]/45
+          tracking-[.16em] text-white/25
         "
       >
         <span>
@@ -278,7 +278,7 @@ export function SitePreloader() {
                 mt-6 block
                 text-[8px] font-bold uppercase
                 tracking-[.16em]
-                text-[#8fb4c8]/55
+                text-white/30
               "
             >
               Initializing engineering system
@@ -314,7 +314,7 @@ export function SitePreloader() {
             >
               <g
                 fill="none"
-                stroke="rgba(143,180,200,.34)"
+                stroke="rgba(255,255,255,.28)"
                 strokeWidth="1"
               >
                 <path
@@ -418,7 +418,7 @@ export function SitePreloader() {
               className="
                 absolute bottom-4 left-4
                 text-[7px] font-bold uppercase
-                tracking-[.14em] text-[#8fb4c8]/35
+                tracking-[.14em] text-white/20
               "
             >
               System schematic / initialization
@@ -454,7 +454,7 @@ export function SitePreloader() {
               <span
                 className="
                   text-[7px] font-bold uppercase
-                  tracking-[.13em] text-[#8fb4c8]/55
+                  tracking-[.13em] text-white/30
                 "
               >
                 {label}
@@ -488,7 +488,7 @@ export function SitePreloader() {
             <span
               className="
                 text-[8px] font-bold uppercase
-                tracking-[.14em] text-[#8fb4c8]/45
+                tracking-[.14em] text-white/25
               "
             >
               System Load
@@ -557,7 +557,7 @@ export function SitePreloader() {
           absolute bottom-8 left-[5vw] right-[5vw] z-20
           flex items-center justify-between
           text-[7px] font-bold uppercase
-          tracking-[.14em] text-[#8fb4c8]/35
+          tracking-[.14em] text-white/20
         "
       >
         <span>

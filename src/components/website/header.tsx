@@ -22,7 +22,7 @@ const navigation = [
 ];
 
 const quoteButtonClass =
-  "inline-flex h-[42px] items-center justify-center gap-5 bg-[var(--site-accent)] px-4 text-[11px] font-bold tracking-[0.01em] text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#147aa5]";
+  "inline-flex h-[42px] items-center justify-center gap-5 bg-[var(--site-accent)] px-4 text-[11px] font-bold tracking-[0.01em] text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#dc5d19]";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -56,7 +56,7 @@ export function Header() {
       <header
         className={`fixed inset-x-0 top-0 z-[100] border-b px-[34px] transition-[background-color,border-color,backdrop-filter] duration-300 max-[650px]:px-[18px] ${
           scrolled
-            ? "border-[#8fb4c8]/20 bg-[#07131a]/92 backdrop-blur-[18px]"
+            ? "border-white/10 bg-[#111111]/90 backdrop-blur-[18px]"
             : "border-transparent bg-transparent"
         }`}
       >
@@ -101,14 +101,14 @@ export function Header() {
       </header>
 
       <div
-        className={`fixed inset-0 z-[90] bg-[#07131a] transition-[opacity,visibility,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] min-[1080px]:hidden ${
+        className={`fixed inset-0 z-[90] bg-[#111111] transition-[opacity,visibility,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] min-[1080px]:hidden ${
           menuOpen
             ? "visible translate-y-0 opacity-100"
             : "invisible pointer-events-none -translate-y-4 opacity-0"
         }`}
       >
         <div className="flex min-h-screen flex-col px-7 pb-8 pt-[118px]">
-          <div className="border-b border-[#8fb4c8]/20 pb-3.5 text-[9px] font-bold uppercase tracking-[0.18em] text-[#8fb4c8]/55">
+          <div className="border-b border-white/10 pb-3.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white/35">
             Navigation
           </div>
 
@@ -118,9 +118,9 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="grid min-h-[72px] grid-cols-[42px_1fr_auto] items-center border-b border-[#8fb4c8]/20 text-white"
+                className="grid min-h-[72px] grid-cols-[42px_1fr_auto] items-center border-b border-white/10 text-white"
               >
-                <span className="text-[9px] text-[#8fb4c8]/45">
+                <span className="text-[9px] text-white/30">
                   0{index + 1}
                 </span>
 
@@ -134,7 +134,7 @@ export function Header() {
           </nav>
 
           <div className="mt-auto flex items-end justify-between gap-8 pt-8 max-[650px]:flex-col max-[650px]:items-stretch">
-            <p className="max-w-[280px] text-[11px] leading-[1.65] text-[#9fb6c4]/60">
+            <p className="max-w-[280px] text-[11px] leading-[1.65] text-white/40">
               Heavy-duty stone processing machinery engineered in Ajmer, India.
             </p>
 
