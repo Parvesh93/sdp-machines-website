@@ -10,18 +10,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const supportItems = [
-  {
-    icon: Settings,
-    label: "Installation & Commissioning",
-  },
-  {
-    icon: Wrench,
-    label: "Maintenance Support",
-  },
-  {
-    icon: Boxes,
-    label: "Spare Parts",
-  },
+  { icon: Settings, label: "Installation & Commissioning" },
+  { icon: Wrench, label: "Maintenance Support" },
+  { icon: Boxes, label: "Spare Parts" },
 ];
 
 export function ServiceNetwork() {
@@ -81,9 +72,7 @@ export function ServiceNetwork() {
 
             <h2 className="m-0 max-w-[980px] text-[clamp(52px,6vw,102px)] font-medium leading-[0.9] tracking-[-0.065em]">
               Support beyond
-              <span className="block text-[#93aab8]/55">
-                machine delivery.
-              </span>
+              <span className="block text-[#93aab8]/55">machine delivery.</span>
             </h2>
           </div>
 
@@ -110,10 +99,13 @@ export function ServiceNetwork() {
           {supportItems.map(({ icon: Icon, label }, index) => (
             <div
               key={label}
-              className="service-preview-card flex min-h-[220px] flex-col justify-between border-b border-[#8fb4c8]/20 p-7 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
+              className="service-preview-card group relative flex min-h-[220px] flex-col justify-between overflow-hidden border-b border-[#8fb4c8]/20 p-7 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-[#0d1d27] last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
             >
               <div className="flex items-center justify-between">
-                <Icon size={22} className="text-[var(--site-accent)]" />
+                <Icon
+                  size={22}
+                  className="text-[var(--site-accent)] transition-transform duration-300 group-hover:rotate-[-6deg] group-hover:scale-110"
+                />
                 <span className="text-[9px] tabular-nums text-[#8fa6b4]/55">
                   0{index + 1}
                 </span>
@@ -122,6 +114,8 @@ export function ServiceNetwork() {
               <strong className="max-w-[260px] text-[clamp(22px,2.2vw,32px)] font-medium leading-[1.05] tracking-[-0.04em]">
                 {label}
               </strong>
+
+              <div className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[var(--site-accent)] transition-transform duration-300 group-hover:scale-x-100" />
             </div>
           ))}
         </div>
