@@ -70,7 +70,7 @@ export function InstallationsPreview() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#f4f7fa] px-[5vw] pb-[150px] pt-[130px] text-[#0b1720] max-[950px]:px-6 max-[950px]:py-[100px] max-[650px]:px-[18px] max-[650px]:py-20"
+      className="relative z-20 overflow-hidden bg-[#f4f7fa] shadow-[0_-40px_90px_rgba(0,0,0,0.28)] px-[5vw] pb-[150px] pt-[130px] text-[#0b1720] max-[950px]:px-6 max-[950px]:py-[100px] max-[650px]:px-[18px] max-[650px]:py-20"
     >
       <div className="mx-auto w-full max-w-[1600px]">
         <div className="installation-heading mb-[70px] grid grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] items-end gap-20 max-[950px]:grid-cols-1 max-[950px]:gap-7">
