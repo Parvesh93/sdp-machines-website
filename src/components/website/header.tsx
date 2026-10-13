@@ -81,7 +81,7 @@ export function Header() {
           <div className="flex items-center gap-2.5">
             <Link
               href="/contact"
-              className={`${quoteButtonClass} hidden min-[651px]:inline-flex`}
+              className={`${quoteButtonClass} hidden min-[1080px]:inline-flex`}
             >
               <span>Get a Quote</span>
               <ArrowUpRight size={16} />
