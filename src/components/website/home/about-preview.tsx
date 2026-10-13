@@ -96,17 +96,17 @@ export function AboutPreview() {
         </div>
       </div>
 
-      <div className="about-capabilities mx-auto mt-16 grid w-full max-w-[1600px] border-y border-[#ccd7de] sm:grid-cols-2 lg:grid-cols-4">
+      <div className="about-capabilities mx-auto mt-12 grid w-full max-w-[1600px] grid-cols-2 border-y border-[#ccd7de] lg:mt-16 lg:grid-cols-4">
         {capabilities.map((item, index) => (
           <div
             key={item}
-            className="about-capability group relative flex min-h-[150px] flex-col justify-between overflow-hidden border-b border-[#ccd7de] p-6 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-white last:border-b-0 sm:border-r sm:nth-[2n]:border-r-0 lg:border-b-0 lg:nth-[2n]:border-r lg:last:border-r-0"
+            className="about-capability group relative flex min-h-[118px] flex-col justify-between overflow-hidden border-b border-[#ccd7de] p-4 transition-[background-color,transform] duration-300 hover:-translate-y-1 hover:bg-white odd:border-r odd:border-[#ccd7de] lg:min-h-[150px] lg:border-b-0 lg:p-6 lg:odd:border-r lg:even:border-r lg:last:border-r-0"
           >
             <span className="text-[9px] tabular-nums text-[var(--site-accent)]">
               0{index + 1}
             </span>
 
-            <strong className="relative z-10 text-[20px] font-medium tracking-[-0.035em]">
+            <strong className="relative z-10 text-[17px] font-medium tracking-[-0.035em] sm:text-[18px] lg:text-[20px]">
               {item}
             </strong>
 
