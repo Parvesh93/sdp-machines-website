@@ -132,7 +132,7 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[145svh] bg-[#111111] text-white max-[700px]:h-[125svh]"
+      className="relative h-[145svh] bg-[#07131a] text-white max-[700px]:h-[125svh]"
     >
       <div className="sticky top-0 h-svh overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
@@ -173,7 +173,7 @@ export function Hero() {
 
         <div className="relative z-10 mx-auto flex h-svh w-full max-w-[1600px] items-center justify-center px-[5vw] py-[130px] max-[650px]:px-[18px]">
           <div className="hero-center-copy mx-auto max-w-[1180px] origin-center text-center will-change-transform">
-            <span className="hero-kicker mb-7 inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.19em] text-white/60 before:h-px before:w-7 before:bg-[var(--site-accent)] before:content-[''] after:h-px after:w-7 after:bg-[var(--site-accent)] after:content-['']">
+            <span className="hero-kicker mb-7 inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.19em] text-[#c4d4de]/75 before:h-px before:w-7 before:bg-[var(--site-accent)] before:content-[''] after:h-px after:w-7 after:bg-[var(--site-accent)] after:content-['']">
               SDP Machines / Ajmer, India
             </span>
 
@@ -189,7 +189,7 @@ export function Hero() {
             <div className="hero-action mt-9 flex justify-center">
               <Link
                 href="/machines"
-                className="group inline-flex h-[50px] items-center justify-center gap-7 border border-white/30 bg-black/15 px-5 text-[10px] font-bold uppercase tracking-[0.08em] text-white backdrop-blur-sm transition duration-200 hover:border-[var(--site-accent)] hover:bg-[var(--site-accent)]"
+                className="group inline-flex h-[50px] items-center justify-center gap-7 border border-[#b8cfdb]/35 bg-black/15 px-5 text-[10px] font-bold uppercase tracking-[0.08em] text-white backdrop-blur-sm transition duration-200 hover:border-[var(--site-accent)] hover:bg-[var(--site-accent)]"
               >
                 Explore machines
                 <ArrowUpRight
@@ -201,7 +201,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hero-scroll absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5 text-[8px] font-semibold uppercase tracking-[0.14em] text-white/45">
+        <div className="hero-scroll absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5 text-[8px] font-semibold uppercase tracking-[0.14em] text-[#a7bdca]/60">
           <span>Scroll</span>
           <ArrowDown
             size={14}
