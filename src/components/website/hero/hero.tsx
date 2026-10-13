@@ -2,15 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowDown,
-  ArrowUpRight,
-} from "lucide-react";
-import {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,23 +17,18 @@ const stockHeroVideo =
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [videoFailed, setVideoFailed] =
-    useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
 
   const heroVideoUrl =
-    process.env.NEXT_PUBLIC_HERO_VIDEO_URL ??
-    stockHeroVideo;
+    process.env.NEXT_PUBLIC_HERO_VIDEO_URL ?? stockHeroVideo;
 
   useEffect(() => {
     const section = sectionRef.current;
-
     if (!section) return;
 
     const ctx = gsap.context(() => {
       const intro = gsap.timeline({
-        defaults: {
-          ease: "power3.out",
-        },
+        defaults: { ease: "power3.out" },
       });
 
       intro
@@ -77,6 +65,14 @@ export function Hero() {
           },
           "-=0.25",
         );
+
+      gsap.to(".hero-scroll-icon", {
+        y: 5,
+        duration: 0.85,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+      });
 
       gsap
         .timeline({
@@ -122,11 +118,66 @@ export function Hero() {
           },
           0,
         );
+
+      const media = gsap.matchMedia();
+
+      media.add(
+        "(pointer: fine) and (prefers-reduced-motion: no-preference)",
+        () => {
+          const copy = section.querySelector<HTMLElement>(".hero-center-copy");
+          const visual = section.querySelector<HTMLElement>(".hero-video-media");
+
+          if (!copy || !visual) return;
+
+          const moveX = gsap.quickTo(copy, "x", {
+            duration: 0.7,
+            ease: "power3.out",
+          });
+          const moveY = gsap.quickTo(copy, "y", {
+            duration: 0.7,
+            ease: "power3.out",
+          });
+          const mediaX = gsap.quickTo(visual, "x", {
+            duration: 1.1,
+            ease: "power3.out",
+          });
+          const mediaY = gsap.quickTo(visual, "y", {
+            duration: 1.1,
+            ease: "power3.out",
+          });
+
+          const handlePointerMove = (event: PointerEvent) => {
+            const rect = section.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width - 0.5;
+            const y = (event.clientY - rect.top) / window.innerHeight - 0.5;
+
+            moveX(x * 16);
+            moveY(y * 10);
+            mediaX(x * -10);
+            mediaY(y * -7);
+          };
+
+          const resetPointer = () => {
+            moveX(0);
+            moveY(0);
+            mediaX(0);
+            mediaY(0);
+          };
+
+          section.addEventListener("pointermove", handlePointerMove);
+          section.addEventListener("pointerleave", resetPointer);
+
+          return () => {
+            section.removeEventListener("pointermove", handlePointerMove);
+            section.removeEventListener("pointerleave", resetPointer);
+          };
+        },
+      );
+
+      return () => media.revert();
     }, section);
 
-    return () => {
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -148,10 +199,7 @@ export function Hero() {
               onError={() => setVideoFailed(true)}
               aria-label="Industrial machine operating in a factory"
             >
-              <source
-                src={heroVideoUrl}
-                type="video/mp4"
-              />
+              <source src={heroVideoUrl} type="video/mp4" />
             </video>
           ) : (
             <Image
@@ -165,9 +213,7 @@ export function Hero() {
           )}
 
           <div className="hero-dim-layer absolute inset-0 bg-black opacity-55" />
-
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[34vh] bg-[linear-gradient(to_bottom,transparent_0%,rgba(0,0,0,0.15)_42%,rgba(0,0,0,0.58)_100%)]" />
-
           <div className="pointer-events-none absolute -bottom-[8vh] left-1/2 h-[24vh] w-[88vw] -translate-x-1/2 rounded-[50%] bg-black/30 blur-[55px]" />
         </div>
 
@@ -178,9 +224,7 @@ export function Hero() {
             </span>
 
             <h1 className="m-0 text-[clamp(62px,9.3vw,154px)] font-medium leading-[0.82] tracking-[-0.078em]">
-              <span className="hero-heading-line block">
-                Built in Ajmer.
-              </span>
+              <span className="hero-heading-line block">Built in Ajmer.</span>
               <span className="hero-heading-line block text-white/72">
                 Engineered to run.
               </span>
@@ -189,12 +233,12 @@ export function Hero() {
             <div className="hero-action mt-9 flex justify-center">
               <Link
                 href="/machines"
-                className="group inline-flex h-[50px] items-center justify-center gap-7 border border-[#b8cfdb]/35 bg-black/15 px-5 text-[10px] font-bold uppercase tracking-[0.08em] text-white backdrop-blur-sm transition duration-200 hover:border-[var(--site-accent)] hover:bg-[var(--site-accent)]"
+                className="group inline-flex h-[50px] items-center justify-center gap-7 border border-[#b8cfdb]/35 bg-black/15 px-5 text-[10px] font-bold uppercase tracking-[0.08em] text-white backdrop-blur-sm transition duration-300 hover:-translate-y-0.5 hover:border-[var(--site-accent)] hover:bg-[var(--site-accent)]"
               >
                 Explore machines
                 <ArrowUpRight
                   size={16}
-                  className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
                 />
               </Link>
             </div>
@@ -205,7 +249,7 @@ export function Hero() {
           <span>Scroll</span>
           <ArrowDown
             size={14}
-            className="text-[var(--site-accent)]"
+            className="hero-scroll-icon text-[var(--site-accent)]"
           />
         </div>
       </div>
