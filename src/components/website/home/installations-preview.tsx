@@ -99,7 +99,7 @@ export function InstallationsPreview() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#f2f0ea] px-[5vw] pb-[150px] pt-[130px] text-[#171817] max-[950px]:px-6 max-[950px]:py-[100px] max-[650px]:px-[18px] max-[650px]:py-20"
+      className="relative overflow-hidden bg-[#f4f7fa] px-[5vw] pb-[150px] pt-[130px] text-[#0b1720] max-[950px]:px-6 max-[950px]:py-[100px] max-[650px]:px-[18px] max-[650px]:py-20"
     >
       <div className="mx-auto w-full max-w-[1600px]">
         <div className="installation-heading mb-[70px] grid grid-cols-[minmax(0,1.4fr)_minmax(280px,0.6fr)] items-end gap-20 max-[950px]:grid-cols-1 max-[950px]:gap-7">
@@ -110,21 +110,21 @@ export function InstallationsPreview() {
 
             <h2 className="m-0 max-w-[980px] text-[clamp(54px,6.5vw,110px)] font-medium leading-[0.88] tracking-[-0.068em] max-[650px]:text-[clamp(48px,14vw,72px)]">
               Built in Ajmer.
-              <span className="block text-[#97978f]">
+              <span className="block text-[#8fa6b4]">
                 Running where stone is processed.
               </span>
             </h2>
           </div>
 
           <div className="pb-2.5">
-            <p className="mb-6 max-w-[380px] text-[12px] leading-[1.75] text-[#666861]">
+            <p className="mb-6 max-w-[380px] text-[12px] leading-[1.75] text-[#5f7480]">
               Machines prove themselves on the factory floor. SDP installations
               operate across India&apos;s major stone-processing clusters.
             </p>
 
             <Link
               href="/installations"
-              className="group inline-flex items-center gap-[15px] text-[10px] font-semibold text-[#151615]"
+              className="group inline-flex items-center gap-[15px] text-[10px] font-semibold text-[#0b1720]"
             >
               View installations
               <ArrowUpRight
@@ -135,8 +135,8 @@ export function InstallationsPreview() {
           </div>
         </div>
 
-        <div className="installation-proof-grid grid grid-cols-[minmax(0,1.5fr)_minmax(300px,0.5fr)] gap-px bg-[#bebdb7] max-[950px]:grid-cols-1">
-          <div className="relative min-h-[650px] overflow-hidden bg-[#181918] max-[950px]:min-h-[520px] max-[650px]:min-h-[420px]">
+        <div className="installation-proof-grid grid grid-cols-[minmax(0,1.5fr)_minmax(300px,0.5fr)] gap-px bg-[#ccd7de] max-[950px]:grid-cols-1">
+          <div className="relative min-h-[650px] overflow-hidden bg-[#0b1720] max-[950px]:min-h-[520px] max-[650px]:min-h-[420px]">
             <Image
               src="/images/installations/installation-01.jpeg"
               alt="SDP machine installed at a stone processing facility"
@@ -158,7 +158,7 @@ export function InstallationsPreview() {
             </div>
           </div>
 
-          <div className="flex flex-col bg-[#171817] text-[#f3f1eb] max-[950px]:grid max-[950px]:grid-cols-2 max-[650px]:block">
+          <div className="flex flex-col bg-[#0b1720] text-[#f3f1eb] max-[950px]:grid max-[950px]:grid-cols-2 max-[650px]:block">
             <div className="grid">
               {stats.map((stat) => (
                 <div
@@ -169,7 +169,7 @@ export function InstallationsPreview() {
                     {stat.value}
                   </strong>
 
-                  <span className="text-[9px] uppercase tracking-[0.09em] text-[#777a75]">
+                  <span className="text-[9px] uppercase tracking-[0.09em] text-[#8fa6b4]">
                     {stat.label}
                   </span>
                 </div>
@@ -177,7 +177,7 @@ export function InstallationsPreview() {
             </div>
 
             <div className="mt-auto p-7">
-              <span className="mb-[18px] block text-[8px] uppercase tracking-[0.14em] text-[#666964]">
+              <span className="mb-[18px] block text-[8px] uppercase tracking-[0.14em] text-[#78909f]">
                 Stone processing clusters
               </span>
 
@@ -187,11 +187,11 @@ export function InstallationsPreview() {
                     key={location}
                     className="grid min-h-[52px] grid-cols-[36px_1fr] items-center border-b border-white/10"
                   >
-                    <span className="text-[8px] text-[#575a55]">
+                    <span className="text-[8px] text-[#6f8795]">
                       0{index + 1}
                     </span>
 
-                    <strong className="text-[12px] font-medium text-[#c3c5c0]">
+                    <strong className="text-[12px] font-medium text-[#c5d5de]">
                       {location}
                     </strong>
                   </div>
