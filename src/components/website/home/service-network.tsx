@@ -52,11 +52,12 @@ export function ServiceNetwork() {
         gsap.fromTo(
           ".service-preview-card",
           {
-            y: 42,
-            opacity: 0.4,
+            scale: 0.985,
+            opacity: 0.45,
+            transformOrigin: "center bottom",
           },
           {
-            y: 0,
+            scale: 1,
             opacity: 1,
             stagger: 0.1,
             ease: "none",
@@ -193,7 +194,7 @@ export function ServiceNetwork() {
             ))}
           </div>
 
-          <div className="mt-5 hidden items-center gap-3 text-[8px] font-semibold uppercase tracking-[0.13em] text-[#aac0cc]/55 lg:flex">
+          <div className="mt-7 hidden items-center gap-3 text-[8px] font-semibold uppercase tracking-[0.13em] text-[#aac0cc]/55 lg:flex">
             <span className="h-px w-10 bg-[var(--site-accent)]" />
             Continue scrolling
           </div>
